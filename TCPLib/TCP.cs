@@ -47,6 +47,10 @@ namespace TCPLib
                 if (!running) buffer_size = value; else throw new Exception("Cannot change packet size while runnning");
             }
         }
+        /// <summary>
+        /// Gives access to running variable that informe if instance is running
+        /// </summary>
+        public bool Running { get => running; set => running = value; }
         protected TcpListener TcpListener { get => tcpListener; set => tcpListener = value; }
         protected TcpClient TcpClient { get => tcpClient; set => tcpClient = value; }
         protected NetworkStream Stream { get => stream; set => stream = value; }
