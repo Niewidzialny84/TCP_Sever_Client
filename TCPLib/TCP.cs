@@ -50,7 +50,7 @@ namespace TCPLib
         /// <summary>
         /// Gives access to running variable that informe if instance is running
         /// </summary>
-        public bool Running { get => running; set => running = value; }
+        protected bool Running { get => running; set => running = value; }
         protected TcpListener TcpListener { get => tcpListener; set => tcpListener = value; }
         protected TcpClient TcpClient { get => tcpClient; set => tcpClient = value; }
         protected NetworkStream Stream { get => stream; set => stream = value; }
