@@ -4,41 +4,39 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
-namespace TCPLib
+namespace TCPLib.Response
 {
-    public class UserContainer
+    class ResponseContainer
     {
-        private List<User> users;
+        private List<Response> responses;
 
-        public UserContainer()
+        public ResponseContainer()
         {
-            users = new List<User>();
+            responses = new List<Response>();
             LoadFromDB();
         }
 
-        /// <summary>
-        /// Adds user to a container
-        /// </summary>
-        /// <param name="user">A user that will be added to a container</param>
-        public void Add(User user)
+        public void Add(Response response)
         {
-            users.Add(user);
+            responses.Add(response);
         }
 
-        public bool CheckCredentials(String login,String password)
+        public String GetResponse(String input)
         {
-            foreach(User x in users)
+            String output = "Sorry i dont understand";
+            foreach (Response x in responses)
             {
-                if(x.Login.Equals(login) && x.Password.Equals(password)) {
-                    return true;
+                if (x.Input.Equals(input))
+                {
+                    return x.Output;
                 }
             }
-            return false;
+            return output;
         }
 
         public void PrintUsers()
         {
-            foreach (User x in users)
+            foreach (Response x in responses)
             {
                 System.Console.WriteLine(x);
             }
@@ -54,21 +52,22 @@ namespace TCPLib
             {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
-                    String request = "SELECT Login,Password FROM Users";
+                    String request = "SELECT Input,Output FROM Responses";
 
-                    using (SqlCommand command = new SqlCommand(request,connection))
+                    using (SqlCommand command = new SqlCommand(request, connection))
                     {
                         connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            while(reader.Read())
+                            while (reader.Read())
                             {
-                                users.Add(new User(reader.GetString(0), reader.GetString(1)));
+                                responses.Add(new Response(reader.GetString(0), reader.GetString(1)));
                             }
                         }
                     }
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 System.Console.Write(e.Message);
             }

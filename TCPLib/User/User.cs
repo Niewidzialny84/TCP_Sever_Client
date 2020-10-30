@@ -28,5 +28,10 @@ namespace TCPLib
         /// Password getter and setter
         /// </summary>
         public String Password { get => password; set => password = value; }
+
+        public override string ToString()
+        {
+            return "login=" + login + " password=" + password;
+        }
     }
 }

@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Response\Response.cs" />
+    <Compile Include="Response\ResponseContainer.cs" />
     <Compile Include="ServerAsyncEcho.cs" />
     <Compile Include="ServerSyncEcho.cs" />
     <Compile Include="TCP.cs" />
