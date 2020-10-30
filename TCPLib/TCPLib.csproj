@@ -44,6 +44,8 @@
     <Compile Include="ServerSyncEcho.cs" />
     <Compile Include="TCP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\User.cs" />
+    <Compile Include="User\UserContainer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

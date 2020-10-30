@@ -9,7 +9,8 @@ namespace Client
     {
         static void Main(string[] args)
         {
-            System.Console.Write("hi");
+            TCPLib.UserContainer userContainer = new TCPLib.UserContainer();
+            System.Console.ReadKey();
         }
     }
 }
