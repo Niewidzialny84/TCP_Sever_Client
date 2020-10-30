@@ -40,10 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
+    <Compile Include="Packet.cs" />
     <Compile Include="Response\Response.cs" />
     <Compile Include="Response\ResponseContainer.cs" />
-    <Compile Include="ServerAsyncEcho.cs" />
-    <Compile Include="ServerSyncEcho.cs" />
+    <Compile Include="TCPAsyncEcho.cs" />
+    <Compile Include="TCPSyncEcho.cs" />
     <Compile Include="TCP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\User.cs" />

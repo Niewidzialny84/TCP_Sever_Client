@@ -10,7 +10,7 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            TCPLib.ServerAsyncEcho serverEcho = new TCPLib.ServerAsyncEcho(IPAddress.Parse("127.0.0.1"), 40000);
+            TCPLib.TCPAsyncEcho serverEcho = new TCPLib.TCPAsyncEcho(IPAddress.Parse("127.0.0.1"), 40000);
             serverEcho.Start();
         }
     }

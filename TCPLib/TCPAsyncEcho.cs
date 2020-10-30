@@ -8,10 +8,10 @@ using System.Text;
 
 namespace TCPLib
 {
-    public class ServerAsyncEcho : TCP
+    public class TCPAsyncEcho : TCP
     {
         public delegate void TransmissionDataDelegate(NetworkStream stream);
-        public ServerAsyncEcho(IPAddress IP, int port) : base(IP, port)
+        public TCPAsyncEcho(IPAddress IP, int port) : base(IP, port)
         {
         }
 
@@ -32,7 +32,7 @@ namespace TCPLib
 
 
 
-        private void TransmissionCallback(IAsyncResult ar)
+        protected void TransmissionCallback(IAsyncResult ar)
         {
             TcpClient tcpClient = (TcpClient)ar.AsyncState;
             tcpClient.Close();

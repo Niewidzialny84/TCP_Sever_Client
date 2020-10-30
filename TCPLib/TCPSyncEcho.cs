@@ -8,10 +8,10 @@ using System.Text;
 
 namespace TCPLib
 {
-    public class ServerSyncEcho : TCP
+    public class TCPSyncEcho : TCP
     {
 
-        public ServerSyncEcho(IPAddress IP, int port) : base(IP, port)
+        public TCPSyncEcho(IPAddress IP, int port) : base(IP, port)
         {
         }
 
