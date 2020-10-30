@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TCPLib.Response
 {
-    class ResponseContainer
+    public class ResponseContainer
     {
         private List<Response> responses;
 

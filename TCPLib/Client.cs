@@ -12,14 +12,12 @@ namespace TCPLib
     {
         private IPAddress address;
         private int port;
-        private bool active;
         private int Buffer_size = 1024;
 
         public Client(IPAddress address, int port)
         {
             this.address = address;
             this.port = port;
-            active = false;
         }
 
         public void Start()

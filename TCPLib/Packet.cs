@@ -10,6 +10,7 @@ namespace TCPLib
         private int size;
         private String message;
         private byte[] buffer;
+        private char[] trim = { (char)0x0 };
 
         public int Size { get => size; }
         public String Message { get => message; }
@@ -17,7 +18,7 @@ namespace TCPLib
 
         public Packet(byte[] buffer, int size)
         {
-            this.message = Encoding.ASCII.GetString(buffer);
+            this.message = Encoding.ASCII.GetString(buffer).Trim(trim);
             this.size = size;
             this.buffer = buffer;
         }
