@@ -25,13 +25,14 @@ namespace TCPLib
         protected override void BeginDataTransmission(NetworkStream stream)
         {
             stream.ReadTimeout = 10000;
-            byte[] buffer = new byte[Buffer_size];
             while (true)
             {
                 try
                 {
+                    byte[] buffer = new byte[Buffer_size];
                     int message_size = stream.Read(buffer, 0, Buffer_size);
                     Packet packet = new Packet(buffer, message_size);
+                    System.Console.Write("M=[" + packet.Message + "]");
                     if (!logged)
                     {
                         String[] parsed = packet.Message.Split(' ');

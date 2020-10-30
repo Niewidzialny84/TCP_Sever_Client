@@ -34,15 +34,16 @@ namespace TCPLib
                 stream.Write(send.Buffer, 0, send.Size);
                 int messageSize = stream.Read(buffer, 0, Buffer_size);
                 Packet recive = new Packet(buffer, messageSize);
-                System.Console.Write(recive.Message);
+                System.Console.WriteLine(recive.Message);
                 while(true)
                 {
+                    buffer = new byte[Buffer_size];
                     input = System.Console.ReadLine();
                     send = new Packet(input);
                     stream.Write(send.Buffer, 0, send.Size);
                     messageSize = stream.Read(buffer, 0, Buffer_size);
                     recive = new Packet(buffer, messageSize);
-                    System.Console.Write(recive.Message);
+                    System.Console.WriteLine(recive.Message);
                 }
             } catch (Exception e)
             {

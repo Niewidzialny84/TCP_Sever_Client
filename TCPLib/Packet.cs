@@ -10,7 +10,7 @@ namespace TCPLib
         private int size;
         private String message;
         private byte[] buffer;
-        private char[] trim = { (char)0x0 };
+        private char[] trim = { (char)0x0 , '\n' , '\r' };
 
         public int Size { get => size; }
         public String Message { get => message; }

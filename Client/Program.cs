@@ -12,6 +12,7 @@ namespace Client
         {
             TCPLib.Client client = new TCPLib.Client(IPAddress.Parse("127.0.0.1"), 40000);
             client.Start();
+            System.Console.ReadKey();
         }
     }
 }
