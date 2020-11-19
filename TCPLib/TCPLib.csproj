@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="AsyncServer\AsyncAbstractServer.cs" />
     <Compile Include="AsyncServer\AsyncComServer.cs" />
+    <Compile Include="AsyncServer\CommandHandler.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Packet.cs" />
     <Compile Include="Response\Response.cs" />

@@ -8,18 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using TCPLib.Response;
 
-namespace TCPLib
+namespace TCPLib.AsyncServer
 {
     public class AsyncComServer : AsyncAbstractServer
     {
         private UserContainer users;
-        private ResponseContainer responses;
+        private CommandHandler handler;
 
         public AsyncComServer(IPAddress ipAddress,int port) : base(ipAddress,port)
         {
             Server = new TcpListener(ipAddress, port);
+            handler = new CommandHandler();
             users = new UserContainer();
-            responses = new ResponseContainer();
         }
 
         public override async Task Start()
@@ -60,12 +60,13 @@ namespace TCPLib
                     }
                 } else
                 {
-                    String response = responses.GetResponse(packet.Message);
-                    StringBuilder s = new StringBuilder("");
-                    StringWriter writer = new StringWriter(s);
-                    await writer.WriteAsync(packet.Message);
-                    System.Console.Write(s.ToString());
-                    packet = new Packet(response);
+                    //String response = responses.GetResponse(packet.Message);
+                    //StringBuilder s = new StringBuilder("");
+                    //StringWriter writer = new StringWriter(s);
+                    //await writer.WriteAsync(packet.Message);
+                    //System.Console.Write(s.ToString());
+                    //packet = new Packet(response);
+                    handler.handle(packet.Message);
                 }
 
                 await stream.WriteAsync(packet.Buffer, 0, packet.Size);
