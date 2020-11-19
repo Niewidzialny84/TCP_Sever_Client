@@ -40,11 +40,11 @@ namespace TCPLib
 
         private async Task handleClient(TcpClient client)
         {
-            byte[] buffer = new byte[Buffer_size];
             NetworkStream stream = client.GetStream();
             ActiveUser user = null;
             while (client.Connected)
             {
+                byte[] buffer = new byte[Buffer_size];
                 int i = await stream.ReadAsync(buffer, 0, buffer.Length);
 
                 Packet packet = new Packet(buffer, i);
@@ -61,6 +61,10 @@ namespace TCPLib
                 } else
                 {
                     String response = responses.GetResponse(packet.Message);
+                    StringBuilder s = new StringBuilder("");
+                    StringWriter writer = new StringWriter(s);
+                    await writer.WriteAsync(packet.Message);
+                    System.Console.Write(s.ToString());
                     packet = new Packet(response);
                 }
 
