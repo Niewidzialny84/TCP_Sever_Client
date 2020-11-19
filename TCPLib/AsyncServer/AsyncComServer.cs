@@ -12,14 +12,12 @@ namespace TCPLib.AsyncServer
 {
     public class AsyncComServer : AsyncAbstractServer
     {
-        private UserContainer users;
         private CommandHandler handler;
 
         public AsyncComServer(IPAddress ipAddress,int port) : base(ipAddress,port)
         {
             Server = new TcpListener(ipAddress, port);
             handler = new CommandHandler();
-            users = new UserContainer();
         }
 
         public override async Task Start()
@@ -52,7 +50,7 @@ namespace TCPLib.AsyncServer
                 if (user == null)
                 {
                     String[] parsed = packet.Message.Split(' ');
-                    packet = checkLogin(parsed);
+                    packet = handler.CheckLogin(parsed);
 
                     if (packet.Success)
                     {
@@ -66,31 +64,9 @@ namespace TCPLib.AsyncServer
                     //await writer.WriteAsync(packet.Message);
                     //System.Console.Write(s.ToString());
                     //packet = new Packet(response);
-                    handler.handle(packet.Message);
+                    packet = handler.Handle(packet.Message);
                 }
-
                 await stream.WriteAsync(packet.Buffer, 0, packet.Size);
-            }
-        }
-
-        private Packet checkLogin(String[] parsed)
-        {
-            if (parsed.Length <= 1)
-            {
-                return new Packet("Invalid credentials");
-            }
-            else
-            {
-                if (users.CheckCredentials(parsed[0], parsed[1]))
-                {
-                    Packet packet = new Packet("Succesfully logged in");
-                    packet.Success = true;
-                    return packet;
-                }
-                else
-                {
-                    return new Packet("Invalid login");
-                }
             }
         }
     }
