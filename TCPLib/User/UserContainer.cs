@@ -159,7 +159,7 @@ namespace TCPLib
                 {
                     using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                     {
-                        String request = "DELETE FROM Users WHERE login= @login";
+                        String request = "DELETE FROM Users WHERE login = @login";
                         using (SqlCommand command = new SqlCommand(request, connection))
                         {
                             connection.Open();
