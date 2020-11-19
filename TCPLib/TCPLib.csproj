@@ -49,6 +49,7 @@
     <Compile Include="TCPSyncEcho.cs" />
     <Compile Include="TCP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\ActiveUser.cs" />
     <Compile Include="User\User.cs" />
     <Compile Include="User\UserContainer.cs" />
   </ItemGroup>
