@@ -39,8 +39,22 @@ namespace TCPLib
                         tmp = u;
                     }
                 }
-
                 users.Remove(tmp);
+            }
+        }
+
+        public void Update(String login, String password)
+        {
+            if (FindUser(login) == true)
+            {
+              
+                foreach (User u in users)
+                {
+                    if (u.Login.Equals(login))
+                    {
+                        u.Password = password;
+                    }
+                }
             }
         }
 
@@ -150,6 +164,40 @@ namespace TCPLib
                         {
                             connection.Open();
                             command.Parameters.Add("@login", SqlDbType.VarChar, 255).Value = login;
+                            command.CommandType = CommandType.Text;
+                            command.ExecuteNonQuery();
+                            connection.Close();
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Console.Write(e.Message);
+                }
+            }
+        }
+
+        private void UpdateUserInDB(String login, String password)
+        {
+            if (FindUser(login) == true)
+            {
+
+                Update(login, password);
+
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "(local)";
+                builder.InitialCatalog = "Communication";
+                builder.IntegratedSecurity = true;
+                try
+                {
+                    using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                    {
+                        String request = "UPDATE Users SET password = @password WHERE login = @login";
+                        using (SqlCommand command = new SqlCommand(request, connection))
+                        {
+                            connection.Open();
+                            command.Parameters.Add("@login", SqlDbType.VarChar, 255).Value = login;
+                            command.Parameters.Add("@password", SqlDbType.VarChar, 255).Value = password;
                             command.CommandType = CommandType.Text;
                             command.ExecuteNonQuery();
                             connection.Close();
