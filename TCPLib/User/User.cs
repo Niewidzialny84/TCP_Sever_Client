@@ -19,6 +19,8 @@ namespace TCPLib
             this.password = password;
         }
 
+        public User() { }
+
         /// <summary>
         /// Login getter and setter
         /// </summary>
