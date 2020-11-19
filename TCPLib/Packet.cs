@@ -11,10 +11,12 @@ namespace TCPLib
         private String message;
         private byte[] buffer;
         private char[] trim = { (char)0x0 , '\n' , '\r' };
+        private bool success;
 
         public int Size { get => size; }
         public String Message { get => message; }
         public byte[] Buffer { get => buffer; }
+        public bool Success { get => success; set => success = value; }
 
         public Packet(byte[] buffer, int size)
         {
