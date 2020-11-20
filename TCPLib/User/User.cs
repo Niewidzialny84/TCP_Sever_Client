@@ -10,27 +10,45 @@ namespace TCPLib
     /// </summary>
     public class User
     {
+        /// <summary>
+        /// The login variable.
+        /// </summary>
         private String login;
+        /// <summary>
+        /// The password variable.
+        /// </summary>
         private String password;
 
+        /// <summary>
+        /// Creates a instance of user.
+        /// </summary>
+        /// <param name="login">User login.</param>
+        /// <param name="password">User password.</param>
         public User(String login, String password)
         {
             this.login = login;
             this.password = password;
         }
 
+        /// <summary>
+        /// Creates an empty instance of user.
+        /// </summary>
         public User() { }
 
         /// <summary>
-        /// Login getter and setter
+        /// Login getter and setter.
         /// </summary>
         public String Login { get => login; set => login = value; }
 
         /// <summary>
-        /// Password getter and setter
+        /// Password getter and setter.
         /// </summary>
         public String Password { get => password; set => password = value; }
 
+        /// <summary>
+        /// Used to return user login and password.
+        /// </summary>
+        /// <returns>String containing login and password.</returns>
         public override string ToString()
         {
             return "login=" + login + " password=" + password;

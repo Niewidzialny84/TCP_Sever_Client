@@ -7,10 +7,19 @@ using System.Text;
 
 namespace TCPLib
 {
+    /// <summary>
+    /// Used to perform operations on the users data base as well as users.
+    /// </summary>
     public class UserContainer
     {
+        /// <summary>
+        /// A list containing all given users.
+        /// </summary>
         private List<User> users;
 
+        /// <summary>
+        /// Creates a instance of the user container.
+        /// </summary>
         public UserContainer()
         {
             users = new List<User>();
@@ -18,14 +27,18 @@ namespace TCPLib
         }
 
         /// <summary>
-        /// Adds user to a container
+        /// Adds user to the container.
         /// </summary>
-        /// <param name="user">A user that will be added to a container</param>
+        /// <param name="user">A user that will be added to a container.</param>
         public void Add(User user)
         {
             users.Add(user);
         }
 
+        /// <summary>
+        /// Removes a user with the given login.
+        /// </summary>
+        /// <param name="login">User login.</param>
         public void Remove(String login)
         {
             if(FindUser(login) == true)
@@ -43,6 +56,11 @@ namespace TCPLib
             }
         }
 
+        /// <summary>
+        /// Updates the password of all users with the given login.
+        /// </summary>
+        /// <param name="login">User login.</param>
+        /// <param name="password">New user password.</param>
         public void Update(String login, String password)
         {
             if (FindUser(login) == true)
@@ -58,6 +76,12 @@ namespace TCPLib
             }
         }
 
+        /// <summary>
+        /// Checks if a user with the given login and password already exists.
+        /// </summary>
+        /// <param name="login">User login.</param>
+        /// <param name="password">User password.</param>
+        /// <returns>If user with login and password was found.</returns>
         public bool CheckCredentials(String login,String password)
         {
             foreach(User x in users)
@@ -69,6 +93,9 @@ namespace TCPLib
             return false;
         }
 
+        /// <summary>
+        /// Prints a list of all users.
+        /// </summary>
         public void PrintUsers()
         {
             foreach (User x in users)
@@ -77,6 +104,9 @@ namespace TCPLib
             }
         }
 
+        /// <summary>
+        /// Loads all users from the data base to use them in later operations.
+        /// </summary>
         private void LoadFromDB()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
@@ -106,7 +136,12 @@ namespace TCPLib
                 System.Console.Write(e.Message);
             }
         }
-
+        
+        /// <summary>
+        /// Adds a new user to the data base.
+        /// </summary>
+        /// <param name="login">User login.</param>
+        /// <param name="password">User password.</param>
         public void AddUserToDB(String login, String password)
         {
            if(FindUser(login) == false)
@@ -144,6 +179,10 @@ namespace TCPLib
             }
         }
 
+        /// <summary>
+        /// Deletes a user with the given login.
+        /// </summary>
+        /// <param name="login">User login to be removed.</param>
         public void RemoveUserFromDB(String login)
         {
             if (FindUser(login) == true)
@@ -177,6 +216,11 @@ namespace TCPLib
             }
         }
 
+        /// <summary>
+        /// Updates user data in the data base.
+        /// </summary>
+        /// <param name="login">User login.</param>
+        /// <param name="password">User password.</param>
         public void UpdateUserInDB(String login, String password)
         {
             if (FindUser(login) == true)
@@ -211,6 +255,10 @@ namespace TCPLib
             }
         }
 
+        /// <summary>
+        /// Used to print all users line by line.
+        /// </summary>
+        /// <returns>List of users as text.</returns>
         public override string ToString()
         {
             String s = "";
@@ -221,6 +269,11 @@ namespace TCPLib
             return s;
         }
 
+        /// <summary>
+        /// Searches if user exists.
+        /// </summary>
+        /// <param name="login">User login to search for.</param>
+        /// <returns>Returns if user exists.</returns>
         private Boolean FindUser(String login)
         {
             foreach(User u in users)
