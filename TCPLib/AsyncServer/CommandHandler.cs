@@ -23,43 +23,41 @@ namespace TCPLib.AsyncServer
         public override Packet Handle(String s)
         {
             String[] args = s.Split(' ');
-            if(args[0] != null)
+            if (args[0] != null)
             {
-                switch (args[0])
+                switch (args.Length)
                 {
-                    case "useradd":
-                        if (args.Length == 3)
+                    case 1:
+                        switch (args[0])
                         {
-                            users.AddUserToDB(args[1], args[2]);
-                            return new PacketSend("Added");
-                        } else
-                        {
-                            return new PacketSend("Invalid data");
+                            case "getall":
+                                return new PacketSend(users.ToString());
                         }
-                    case "userdel":
-                        if(args.Length == 2)
+                        break;
+                    case 2:
+                        switch (args[0])
                         {
-                            users.RemoveUserFromDB(args[1]);
-                            return new PacketSend("Removed");
-                        } else
-                        {
-                            return new PacketSend("Invalid data");
+                            case "userdel":
+                                users.RemoveUserFromDB(args[1]);
+                                return new PacketSend("Removed");
                         }
-                    case "usermod":
-                        if (args.Length == 3)
+                        break;
+                    case 3:
+                        switch (args[0])
                         {
-                            users.UpdateUserInDB(args[1], args[2]);
-                            return new PacketSend("Modified");
-                        }
-                        else
-                        {
-                            return new PacketSend("Invalid data");
-                        }
-                    case "getall":
-                        return new PacketSend(users.ToString());
-                }
-            } 
+                            case "useradd":
+                                users.AddUserToDB(args[1], args[2]);
+                                return new PacketSend("Added");
+                            case "usermod":
+                                users.UpdateUserInDB(args[1], args[2]);
+                                return new PacketSend("Modified");
 
+                        }
+                        break;
+                    default:
+                        return new PacketSend("Invalid data");
+                }
+            }
             String response = responses.GetResponse(s);
             return new PacketSend(response);
         }
