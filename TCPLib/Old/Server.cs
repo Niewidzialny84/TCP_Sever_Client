@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using TCPLib.PacketLib;
 using TCPLib.Response;
 
 namespace TCPLib 
@@ -31,14 +32,14 @@ namespace TCPLib
                 {
                     byte[] buffer = new byte[Buffer_size];
                     int message_size = stream.Read(buffer, 0, Buffer_size);
-                    Packet packet = new Packet(buffer, message_size);
+                    Packet packet = new PacketRecive(buffer, message_size);
                     System.Console.Write("M=[" + packet.Message + "]");
                     if (!logged)
                     {
                         String[] parsed = packet.Message.Split(' ');
                         if(parsed.Length <= 1)
                         {
-                            packet = new Packet("Invalid credentials");
+                            packet = new PacketSend("Invalid credentials");
                             stream.Write(packet.Buffer, 0, packet.Size);
 
                         } else
@@ -46,18 +47,18 @@ namespace TCPLib
                             if(users.CheckCredentials(parsed[0], parsed[1]))
                             {
                                 logged = true;
-                                packet = new Packet("Succesfully logged in");
+                                packet = new PacketSend("Succesfully logged in");
                                 stream.Write(packet.Buffer, 0, packet.Size);
                             } else
                             {
-                                packet = new Packet("Invalid login");
+                                packet = new PacketSend("Invalid login");
                                 stream.Write(packet.Buffer, 0, packet.Size);
                             }
                         }
                     } else
                     {
                         String response = responses.GetResponse(packet.Message);
-                        packet = new Packet(response);
+                        packet = new PacketSend(response);
                         stream.Write(packet.Buffer, 0, packet.Size);
                     }
 

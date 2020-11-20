@@ -6,21 +6,39 @@ using System.Text;
 
 namespace TCPLib.Response
 {
+    /// <summary>
+    /// Contains and operates on posible server responses.
+    /// </summary>
     public class ResponseContainer
     {
+        /// <summary>
+        /// A list of possible responses.
+        /// </summary>
         private List<Response> responses;
 
+        /// <summary>
+        /// Creates a instance of the response container.
+        /// </summary>
         public ResponseContainer()
         {
             responses = new List<Response>();
             LoadFromDB();
         }
-
+        
+        /// <summary>
+        /// Adds a new respons to the list.
+        /// </summary>
+        /// <param name="response">The response with input and output.</param>
         public void Add(Response response)
         {
             responses.Add(response);
         }
-
+        
+        /// <summary>
+        /// Returns a response text to the given input or "Sorry i dont understand" by default.
+        /// </summary>
+        /// <param name="input">Input used to receive a response.</param>
+        /// <returns>Output appropriate to the input.</returns>
         public String GetResponse(String input)
         {
             String output = "Sorry i dont understand";
@@ -34,6 +52,9 @@ namespace TCPLib.Response
             return output;
         }
 
+        /// <summary>
+        /// Prints a list of all users.
+        /// </summary>
         public void PrintUsers()
         {
             foreach (Response x in responses)
@@ -42,6 +63,9 @@ namespace TCPLib.Response
             }
         }
 
+        /// <summary>
+        /// Loads all responses saved in a data base to use them later.
+        /// </summary>
         private void LoadFromDB()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
