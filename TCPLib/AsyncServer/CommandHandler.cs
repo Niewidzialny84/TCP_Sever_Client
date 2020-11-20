@@ -21,6 +21,44 @@ namespace TCPLib.AsyncServer
 
         public Packet Handle(String s)
         {
+            String[] args = s.Split(' ');
+            if(args[0] != null)
+            {
+                switch (args[0])
+                {
+                    case "useradd":
+                        if (args.Length == 3)
+                        {
+                            users.AddUserToDB(args[1], args[2]);
+                            return new Packet.Packet("Added");
+                        } else
+                        {
+                            return new Packet("Invalid data");
+                        }
+                    case "userdel":
+                        if(args.Length == 2)
+                        {
+                            users.RemoveUserFromDB(args[1]);
+                            return new Packet("Removed");
+                        } else
+                        {
+                            return new Packet("Invalid data");
+                        }
+                    case "usermod":
+                        if (args.Length == 3)
+                        {
+                            users.UpdateUserInDB(args[1], args[2]);
+                            return new Packet("Modified");
+                        }
+                        else
+                        {
+                            return new Packet("Invalid data");
+                        }
+                    case "getall":
+                        return new Packet(users.ToString());
+                }
+            } 
+
             String response = responses.GetResponse(s);
             return new Packet(response);
         }

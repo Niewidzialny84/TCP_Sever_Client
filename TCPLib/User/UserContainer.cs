@@ -107,7 +107,7 @@ namespace TCPLib
             }
         }
 
-        private void AddUserToDB(String login, String password)
+        public void AddUserToDB(String login, String password)
         {
            if(FindUser(login) == false)
            {
@@ -144,7 +144,7 @@ namespace TCPLib
             }
         }
 
-        private void RemoveUserFromDB(String login)
+        public void RemoveUserFromDB(String login)
         {
             if (FindUser(login) == true)
             {
@@ -177,7 +177,7 @@ namespace TCPLib
             }
         }
 
-        private void UpdateUserInDB(String login, String password)
+        public void UpdateUserInDB(String login, String password)
         {
             if (FindUser(login) == true)
             {
@@ -209,6 +209,16 @@ namespace TCPLib
                     System.Console.Write(e.Message);
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            String s = "";
+            foreach(User u in users)
+            {
+                s += u.ToString() + "\r\n";
+            }
+            return s;
         }
 
         private Boolean FindUser(String login)
