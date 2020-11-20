@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace TCPLib.PacketLib
 {
+    /// <summary>
+    /// A packet used to send messages.
+    /// </summary>
     public class PacketSend : Packet
     {
+        /// <summary>
+        /// Creates a instance of a packet which is to be send.
+        /// </summary>
+        /// <param name="message">Message to be send.</param>
         public PacketSend(String message)
         {
             this.message = message + "\n\r";
