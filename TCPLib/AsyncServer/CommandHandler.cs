@@ -8,18 +8,34 @@ using TCPLib.Response;
 
 namespace TCPLib.AsyncServer
 {
+    /// <summary>
+    /// Command handler used by the communications server.
+    /// </summary>
     public class CommandHandler : Handler<String>
     {
+        /// <summary>
+        /// Contains users.
+        /// </summary>
         private UserContainer users;
+        /// <summary>
+        /// Contains responses.
+        /// </summary>
         private ResponseContainer responses;
 
-
+        /// <summary>
+        /// Creates a instance of the command handler.
+        /// </summary>
         public CommandHandler() : base()
         {
             responses = new ResponseContainer();
             users = new UserContainer();
         }
 
+        /// <summary>
+        /// Funktion used to handle client requests.
+        /// </summary>
+        /// <param name="s">Received message.</param>
+        /// <returns>Response packet.</returns>
         public override Packet Handle(String s)
         {
             String[] args = s.Split(' ');
@@ -55,13 +71,18 @@ namespace TCPLib.AsyncServer
                         }
                         break;
                     default:
-                        return new PacketSend("Invalid data");
+                        break;
                 }
             }
             String response = responses.GetResponse(s);
             return new PacketSend(response);
         }
 
+        /// <summary>
+        /// Funktion used to validate user login and password and allow him to sign in.
+        /// </summary>
+        /// <param name="parsed">Array of parsed words. Should contain login and password.</param>
+        /// <returns>Response packet.</returns>
         public Packet CheckLogin(String[] parsed)
         {
             if (parsed.Length <= 1)

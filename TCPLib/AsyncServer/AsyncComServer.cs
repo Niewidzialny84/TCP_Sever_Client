@@ -11,16 +11,31 @@ using TCPLib.Response;
 
 namespace TCPLib.AsyncServer
 {
+    /// <summary>
+    /// Asynchronous server for communication.
+    /// </summary>
     public class AsyncComServer : AsyncAbstractServer
     {
+        /// <summary>
+        /// Instance of the command handler.
+        /// </summary>
         private CommandHandler handler;
 
+        /// <summary>
+        /// Creates a instance of the server.
+        /// </summary>
+        /// <param name="ipAddress">Server IP adress.</param>
+        /// <param name="port">Server port number.</param>
         public AsyncComServer(IPAddress ipAddress,int port) : base(ipAddress,port)
         {
             Server = new TcpListener(ipAddress, port);
             handler = new CommandHandler();
         }
 
+        /// <summary>
+        /// Funktion to accept and handle clients.
+        /// </summary>
+        /// <returns></returns>
         public override async Task Start()
         {
             Server.Start();
@@ -37,6 +52,11 @@ namespace TCPLib.AsyncServer
             }
         }
 
+        /// <summary>
+        /// Allows a client to sign in as a user and further interact with the server.
+        /// </summary>
+        /// <param name="client">The connected client to interact with.</param>
+        /// <returns></returns>
         private async Task handleClient(TcpClient client)
         {
             NetworkStream stream = client.GetStream();

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace TCPLib.AsyncServer
 {
+    /// <summary>
+    /// Abstract server can be inherited.
+    /// </summary>
     public abstract class AsyncAbstractServer
     {
         #region Fields

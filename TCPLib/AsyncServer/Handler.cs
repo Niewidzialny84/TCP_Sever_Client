@@ -7,7 +7,10 @@ using TCPLib.PacketLib;
 
 namespace TCPLib.AsyncServer
 {
-   
+   /// <summary>
+   /// Abstract command handler can be inherited.
+   /// </summary>
+   /// <typeparam name="T"></typeparam>
     public abstract class Handler<T>
     {
         public Handler() { }
