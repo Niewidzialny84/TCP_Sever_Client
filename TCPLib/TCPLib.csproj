@@ -48,10 +48,10 @@
     <Compile Include="AsyncServer\AsyncComServer.cs" />
     <Compile Include="AsyncServer\CommandHandler.cs" />
     <Compile Include="Client.cs" />
-    <Compile Include="Packet\Packet.cs" />
-    <Compile Include="Packet\PacketLogin.cs" />
-    <Compile Include="Packet\PacketRecive.cs" />
-    <Compile Include="Packet\PacketSend.cs" />
+    <Compile Include="PacketLib\Packet.cs" />
+    <Compile Include="PacketLib\PacketLogin.cs" />
+    <Compile Include="PacketLib\PacketRecive.cs" />
+    <Compile Include="PacketLib\PacketSend.cs" />
     <Compile Include="Response\Response.cs" />
     <Compile Include="Response\ResponseContainer.cs" />
     <Compile Include="Old\Server.cs" />

@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using TCPLib.PacketLib;
 using TCPLib.Response;
 
 namespace TCPLib.AsyncServer
@@ -45,14 +46,14 @@ namespace TCPLib.AsyncServer
                 byte[] buffer = new byte[Buffer_size];
                 int i = await stream.ReadAsync(buffer, 0, buffer.Length);
 
-                Packet packet = new Packet(buffer, i);
+                Packet packet = new PacketRecive(buffer, i);
 
                 if (user == null)
                 {
                     String[] parsed = packet.Message.Split(' ');
                     packet = handler.CheckLogin(parsed);
 
-                    if (packet.Success)
+                    if (packet is PacketLogin)
                     {
                         user = new ActiveUser(parsed[0], parsed[1]);
                     }

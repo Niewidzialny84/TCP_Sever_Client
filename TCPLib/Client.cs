@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using TCPLib.PacketLib;
 
 namespace TCPLib
 {
@@ -30,19 +31,19 @@ namespace TCPLib
             {
                 System.Console.Write("Enter login credentials separated by space (eq. [admin admin])");
                 string input = System.Console.ReadLine();
-                Packet send = new Packet(input);
+                Packet send = new PacketSend(input);
                 stream.Write(send.Buffer, 0, send.Size);
                 int messageSize = stream.Read(buffer, 0, Buffer_size);
-                Packet recive = new Packet(buffer, messageSize);
+                Packet recive = new PacketRecive(buffer, messageSize);
                 System.Console.WriteLine(recive.Message);
                 while(true)
                 {
                     buffer = new byte[Buffer_size];
                     input = System.Console.ReadLine();
-                    send = new Packet(input);
+                    send = new PacketSend(input);
                     stream.Write(send.Buffer, 0, send.Size);
                     messageSize = stream.Read(buffer, 0, Buffer_size);
-                    recive = new Packet(buffer, messageSize);
+                    recive = new PacketRecive(buffer, messageSize);
                     System.Console.WriteLine(recive.Message);
                 }
             } catch (Exception e)

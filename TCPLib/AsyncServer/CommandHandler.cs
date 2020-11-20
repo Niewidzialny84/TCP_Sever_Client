@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TCPLib.PacketLib;
 using TCPLib.Response;
 
 namespace TCPLib.AsyncServer
@@ -30,56 +31,56 @@ namespace TCPLib.AsyncServer
                         if (args.Length == 3)
                         {
                             users.AddUserToDB(args[1], args[2]);
-                            return new Packet.Packet("Added");
+                            return new PacketSend("Added");
                         } else
                         {
-                            return new Packet("Invalid data");
+                            return new PacketSend("Invalid data");
                         }
                     case "userdel":
                         if(args.Length == 2)
                         {
                             users.RemoveUserFromDB(args[1]);
-                            return new Packet("Removed");
+                            return new PacketSend("Removed");
                         } else
                         {
-                            return new Packet("Invalid data");
+                            return new PacketSend("Invalid data");
                         }
                     case "usermod":
                         if (args.Length == 3)
                         {
                             users.UpdateUserInDB(args[1], args[2]);
-                            return new Packet("Modified");
+                            return new PacketSend("Modified");
                         }
                         else
                         {
-                            return new Packet("Invalid data");
+                            return new PacketSend("Invalid data");
                         }
                     case "getall":
-                        return new Packet(users.ToString());
+                        return new PacketSend(users.ToString());
                 }
             } 
 
             String response = responses.GetResponse(s);
-            return new Packet(response);
+            return new PacketSend(response);
         }
 
         public Packet CheckLogin(String[] parsed)
         {
             if (parsed.Length <= 1)
             {
-                return new Packet("Invalid credentials");
+                return new PacketSend("Invalid credentials");
             }
             else
             {
                 if (users.CheckCredentials(parsed[0], parsed[1]))
                 {
-                    Packet packet = new Packet("Succesfully logged in");
+                    PacketLogin packet = new PacketLogin("Succesfully logged in");
                     packet.Success = true;
                     return packet;
                 }
                 else
                 {
-                    return new Packet("Invalid login");
+                    return new PacketSend("Invalid login");
                 }
             }
         }
