@@ -47,6 +47,7 @@
     <Compile Include="AsyncServer\AsyncAbstractServer.cs" />
     <Compile Include="AsyncServer\AsyncComServer.cs" />
     <Compile Include="AsyncServer\CommandHandler.cs" />
+    <Compile Include="AsyncServer\Handler.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="PacketLib\Packet.cs" />
     <Compile Include="PacketLib\PacketLogin.cs" />

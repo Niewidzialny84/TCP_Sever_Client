@@ -8,19 +8,19 @@ using TCPLib.Response;
 
 namespace TCPLib.AsyncServer
 {
-    public class CommandHandler
+    public class CommandHandler : Handler<String>
     {
         private UserContainer users;
         private ResponseContainer responses;
 
 
-        public CommandHandler()
+        public CommandHandler() : base()
         {
             responses = new ResponseContainer();
             users = new UserContainer();
         }
 
-        public Packet Handle(String s)
+        public override Packet Handle(String s)
         {
             String[] args = s.Split(' ');
             if(args[0] != null)
