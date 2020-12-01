@@ -138,5 +138,14 @@ namespace TCPLib
             }
 
         }
+        public String Communicate(String msg)
+        {
+            Packet send = new PacketSend(msg);
+            stream.Write(send.Buffer, 0, send.Size);
+            byte[] buffer = new byte[Buffer_size];
+            int messageSize = stream.Read(buffer, 0, Buffer_size);
+            Packet recive = new PacketRecive(buffer, messageSize);
+            return recive.Message;
+        }
     }
 }

@@ -34,8 +34,9 @@ namespace GuiClient
             {
                 if (client.LoginUser(userBox.Text, passwdBox.Text))
                 {
-                    this.responseLabel.ForeColor = Color.Green;
-                    this.responseLabel.Text = "HEY";
+                    ClientCom clientCom = new ClientCom(client);
+                    this.Hide();
+                    clientCom.Show();
                 }
                 else
                 {
