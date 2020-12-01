@@ -87,19 +87,19 @@ namespace TCPLib.AsyncServer
         {
             if (parsed.Length <= 1)
             {
-                return new PacketSend("Invalid credentials");
+                return new PacketSend("NAK");
             }
             else
             {
                 if (users.CheckCredentials(parsed[0], parsed[1]))
                 {
-                    PacketLogin packet = new PacketLogin("Succesfully logged in");
+                    PacketLogin packet = new PacketLogin("ACK");
                     packet.Success = true;
                     return packet;
                 }
                 else
                 {
-                    return new PacketSend("Invalid login");
+                    return new PacketSend("NAK");
                 }
             }
         }

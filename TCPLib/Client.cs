@@ -74,4 +74,69 @@ namespace TCPLib
             }
         }
     }
+    public class GuiClient
+    {
+        /// <summary>
+        /// Server IP adress to connect to.
+        /// </summary>
+        private IPAddress address;
+        private NetworkStream stream;
+        TcpClient client = new TcpClient();
+        /// <summary>
+        /// Server port number to connecto to.
+        /// </summary>
+        private int port;
+        /// <summary>
+        /// Maximal buffer size for received messages.
+        /// </summary>
+        private int Buffer_size = 1024;
+
+        /// <summary>
+        /// Creates a instance of client.
+        /// </summary>
+        /// <param name="address">IP adress of the server to connect to.</param>
+        /// <param name="port">Port number of the server to connect to.</param>
+        public GuiClient(IPAddress address, int port)
+        {
+            this.address = address;
+            this.port = port;
+        }
+
+        /// <summary>
+        /// Method used to run all client functions.
+        /// </summary>
+        public void Start()
+        {
+          
+            client.Connect(address, port);
+            byte[] buffer = new byte[Buffer_size];
+            stream = client.GetStream();
+            try
+            {
+      
+            }
+            catch (Exception e)
+            {
+                System.Console.Write(e.Message);
+            }
+        }
+        public bool LoginUser(String login, String passwd)
+        {
+            Packet send = new PacketSend(login+" "+passwd);
+            stream.Write(send.Buffer, 0, send.Size);
+            byte[] buffer = new byte[Buffer_size];
+            int messageSize = stream.Read(buffer, 0, Buffer_size);
+            Packet recive = new PacketRecive(buffer, messageSize);
+            System.Console.WriteLine(recive.Message);
+            if(Equals(recive.Message,"ACK"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+    }
 }
