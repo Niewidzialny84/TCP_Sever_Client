@@ -83,6 +83,29 @@ namespace TCPLib.AsyncServer
             return new PacketSend(response);
         }
 
+        public override Packet HandleNormal(String s)
+        {
+            String[] args = s.Split(' ');
+            if (args[0] != null)
+            {
+                switch (args.Length)
+                {
+                    case 1:
+                        switch (args[0])
+                        {
+                            case "usermod":
+                                users.UpdateUserInDB(args[1], args[2]);
+                                return new PacketSend("Modified");
+                        }
+                        break;                  
+                    default:
+                        break;
+                }
+            }
+            String response = responses.GetResponse(s);
+            return new PacketSend(response);
+        }
+
         /// <summary>
         /// Funktion used to validate user login and password and allow him to sign in.
         /// </summary>

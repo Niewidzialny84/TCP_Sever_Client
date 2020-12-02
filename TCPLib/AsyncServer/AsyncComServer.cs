@@ -88,7 +88,16 @@ namespace TCPLib.AsyncServer
                     //await writer.WriteAsync(packet.Message);
                     //System.Console.Write(s.ToString());
                     //packet = new Packet(response);
-                    packet = handler.Handle(packet.Message);
+
+                    if (user.Admin.Equals("True"))
+                    {
+                        packet = handler.Handle(packet.Message);
+                    }
+                    else
+                    {
+                        packet = handler.HandleNormal(packet.Message);
+                    }
+                    
                 }
                 await stream.WriteAsync(packet.Buffer, 0, packet.Size);
             }
