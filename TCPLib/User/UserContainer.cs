@@ -286,5 +286,17 @@ namespace TCPLib
             }
             return false;
         }
+
+        public String GetPermission(String login)
+        {
+            foreach(User u in users)
+            {
+                if(u.Login.Equals(login))
+                {
+                    return u.Admin;
+                }        
+            }
+            return null;
+        }
     }
 }

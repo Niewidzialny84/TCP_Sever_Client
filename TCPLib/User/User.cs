@@ -26,6 +26,12 @@ namespace TCPLib
         /// </summary>
         /// <param name="login">User login.</param>
         /// <param name="password">User password.</param>
+        public User(String login, String password)
+        {
+            this.login = login;
+            this.password = password;        
+        }
+
         public User(String login, String password, String admin)
         {
             this.login = login;

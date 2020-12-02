@@ -60,7 +60,7 @@ namespace TCPLib.AsyncServer
                         break;
                     case 3:
                         switch (args[0])
-                        {                         
+                        {                     
                             case "usermod":
                                 users.UpdateUserInDB(args[1], args[2]);
                                 return new PacketSend("Modified");

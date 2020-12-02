@@ -21,6 +21,8 @@ namespace TCPLib.AsyncServer
         /// </summary>
         private CommandHandler handler;
 
+        private UserContainer userCont;
+
         /// <summary>
         /// Creates a instance of the server.
         /// </summary>
@@ -30,6 +32,7 @@ namespace TCPLib.AsyncServer
         {
             Server = new TcpListener(ipAddress, port);
             handler = new CommandHandler();
+            userCont = new UserContainer();
         }
 
         /// <summary>
@@ -75,7 +78,7 @@ namespace TCPLib.AsyncServer
 
                     if (packet is PacketLogin)
                     {
-                        user = new ActiveUser(parsed[0], parsed[1]);
+                        user = new ActiveUser(parsed[0], parsed[1], userCont.GetPermission(parsed[0]));
                     }
                 } else
                 {

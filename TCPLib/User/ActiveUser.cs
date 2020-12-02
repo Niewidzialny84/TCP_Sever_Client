@@ -41,6 +41,5 @@ namespace TCPLib
         /// </summary>
         public int Id { get => id; set => id = value; }
 
-        public String Admin { get => admin; set => admin = value; }
     }
 }
