@@ -19,15 +19,18 @@ namespace TCPLib
         /// </summary>
         private String password;
 
+        private bool admin;
+
         /// <summary>
         /// Creates a instance of user.
         /// </summary>
         /// <param name="login">User login.</param>
         /// <param name="password">User password.</param>
-        public User(String login, String password)
+        public User(String login, String password, bool admin)
         {
             this.login = login;
             this.password = password;
+            this.admin = admin;
         }
 
         /// <summary>
@@ -45,13 +48,15 @@ namespace TCPLib
         /// </summary>
         public String Password { get => password; set => password = value; }
 
+        public bool Admin { get => admin; set => admin = value; }
+
         /// <summary>
         /// Used to return user login and password.
         /// </summary>
         /// <returns>String containing login and password.</returns>
         public override string ToString()
         {
-            return "login=" + login + " password=" + password;
+            return "login=" + login + " password=" + password + " is admin=" + admin;
         }
     }
 }
