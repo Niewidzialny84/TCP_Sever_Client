@@ -19,14 +19,14 @@ namespace TCPLib
         /// </summary>
         private String password;
 
-        private bool admin;
+        private String admin;
 
         /// <summary>
         /// Creates a instance of user.
         /// </summary>
         /// <param name="login">User login.</param>
         /// <param name="password">User password.</param>
-        public User(String login, String password, bool admin)
+        public User(String login, String password, String admin)
         {
             this.login = login;
             this.password = password;
@@ -48,7 +48,7 @@ namespace TCPLib
         /// </summary>
         public String Password { get => password; set => password = value; }
 
-        public bool Admin { get => admin; set => admin = value; }
+        public String Admin { get => admin; set => admin = value; }
 
         /// <summary>
         /// Used to return user login and password.
