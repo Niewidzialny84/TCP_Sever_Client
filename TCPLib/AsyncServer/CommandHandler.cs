@@ -83,19 +83,18 @@ namespace TCPLib.AsyncServer
             return new PacketSend(response);
         }
 
-        public override Packet HandleNormal(String s)
+        public override Packet HandleNormal(String s, String login)
         {
             String[] args = s.Split(' ');
             if (args[0] != null)
             {
                 switch (args.Length)
                 {
-                    case 1:
-                        switch (args[0])
+                    case 3:
+                        if(args[0].Equals("usermod") && args[1].Equals(login))
                         {
-                            case "usermod":
-                                users.UpdateUserInDB(args[1], args[2]);
-                                return new PacketSend("Modified");
+                            users.UpdateUserInDB(args[1], args[2]);
+                            return new PacketSend("Modified");
                         }
                         break;                  
                     default:

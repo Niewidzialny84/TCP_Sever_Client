@@ -75,6 +75,7 @@ namespace TCPLib.AsyncServer
                 {
                     String[] parsed = packet.Message.Split(' ');
                     packet = handler.CheckLogin(parsed);
+                    userCont = new UserContainer();
 
                     if (packet is PacketLogin)
                     {
@@ -95,7 +96,7 @@ namespace TCPLib.AsyncServer
                     }
                     else
                     {
-                        packet = handler.HandleNormal(packet.Message);
+                        packet = handler.HandleNormal(packet.Message, user.Login);
                     }
                     
                 }
