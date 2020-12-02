@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TCPLib.Tools
 {
-    class RandGen
+    public class RandGen
     {
         public RandGen() { }
 
@@ -14,7 +14,6 @@ namespace TCPLib.Tools
         {
           Random random = new Random();
           return random.Next(min, max + 1);
-
         }
     }
 }
