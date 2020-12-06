@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="UnitTestRandGen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserConteinerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

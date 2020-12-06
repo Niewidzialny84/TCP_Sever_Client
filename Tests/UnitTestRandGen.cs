@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TCPLib.Tools;
 
-namespace UnitTests
+namespace Tests
 {
     [TestClass]
     public class UnitTestRandGen

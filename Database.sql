@@ -10,9 +10,9 @@
 	PRIMARY KEY (UserID)
 );*/
 
---INSERT INTO Users (UserID,Login,Password) VALUES ( 1, 'admin', 'admin', 1);
---INSERT INTO Users (UserID,Login,Password) VALUES ( 2, 'user5', 'qwerty', 0);
---INSERT INTO Users (UserID,Login,Password) VALUES ( 3, 'xx_GoodPlayer_xx', 'hello', 0);
+--INSERT INTO Users (UserID,Login,Password,Admin) VALUES ( 1, 'admin', 'admin', 1);
+--INSERT INTO Users (UserID,Login,Password,Admin) VALUES ( 2, 'user5', 'qwerty', 0);
+--INSERT INTO Users (UserID,Login,Password,Admin) VALUES ( 3, 'xx_GoodPlayer_xx', 'hello', 0);
 
 --SELECT * From Users;
 
