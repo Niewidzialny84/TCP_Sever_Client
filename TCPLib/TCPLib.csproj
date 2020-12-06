@@ -53,6 +53,7 @@
     <Compile Include="PacketLib\PacketLogin.cs" />
     <Compile Include="PacketLib\PacketRecive.cs" />
     <Compile Include="PacketLib\PacketSend.cs" />
+    <Compile Include="Response\NumResponse.cs" />
     <Compile Include="Response\Response.cs" />
     <Compile Include="Response\ResponseContainer.cs" />
     <Compile Include="Old\Server.cs" />

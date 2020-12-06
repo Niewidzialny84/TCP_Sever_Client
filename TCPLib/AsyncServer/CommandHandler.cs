@@ -21,6 +21,10 @@ namespace TCPLib.AsyncServer
         /// Contains responses.
         /// </summary>
         private ResponseContainer responses;
+        /// <summary>
+        /// Used to respond with random numbers.
+        /// </summary>
+        NumResponse numResponse = new NumResponse();
 
         /// <summary>
         /// Creates a instance of the command handler.
@@ -65,6 +69,8 @@ namespace TCPLib.AsyncServer
                                 users.UpdateUserInDB(args[1], args[2]);
                                 return new PacketSend("Modified");
 
+                            case "random":
+                                return new PacketSend(numResponse.getRand(args[1],args[2]));
                         }
                         break;
                     case 4:
@@ -83,6 +89,12 @@ namespace TCPLib.AsyncServer
             return new PacketSend(response);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public override Packet HandleNormal(String s, String login)
         {
             String[] args = s.Split(' ');
@@ -91,10 +103,14 @@ namespace TCPLib.AsyncServer
                 switch (args.Length)
                 {
                     case 3:
-                        if(args[0].Equals("usermod") && args[1].Equals(login))
+                        if (args[0].Equals("usermod") && args[1].Equals(login))
                         {
                             users.UpdateUserInDB(args[1], args[2]);
                             return new PacketSend("Modified");
+                        }
+                        else if (args[0].Equals("random"))
+                        {
+                            return new PacketSend(numResponse.getRand(args[1], args[2]));
                         }
                         break;                  
                     default:

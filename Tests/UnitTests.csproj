@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HandlerTest.cs" />
+    <Compile Include="NumResponseTest.cs" />
     <Compile Include="PacketTest.cs" />
     <Compile Include="ResponseContainerTest.cs" />
     <Compile Include="UnitTestRandGen.cs" />
