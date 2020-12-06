@@ -7,10 +7,10 @@ namespace Tests
     [TestClass]
     public class UserConteinerTest
     {
-        private UserContainer c;
+        public static UserContainer c;
 
         [ClassInitialize]
-        public void initialize()
+        public static void initialize(TestContext context)
         {
            c = new UserContainer();
         }
@@ -36,5 +36,21 @@ namespace Tests
             Assert.IsTrue(c.GetPermission("user5").Equals("False"));
         }
 
+        [TestMethod]
+        public void AddUserTest()
+        {
+            c.AddUserToDB("a", "a","True");
+
+            Assert.IsTrue(c.CheckCredentials("a", "a"));
+            Assert.IsTrue(c.GetPermission("a").Equals("True"));
+        }
+
+        [TestMethod]
+        public void DelUserTest()
+        {
+            c.RemoveUserFromDB("a");
+
+            Assert.IsFalse(c.CheckCredentials("a", "a"));
+        }
     }
 }
