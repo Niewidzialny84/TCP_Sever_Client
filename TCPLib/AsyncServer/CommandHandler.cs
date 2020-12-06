@@ -60,16 +60,43 @@ namespace TCPLib.AsyncServer
                         break;
                     case 3:
                         switch (args[0])
-                        {
-                            case "useradd":
-                                users.AddUserToDB(args[1], args[2]);
-                                return new PacketSend("Added");
+                        {                     
                             case "usermod":
                                 users.UpdateUserInDB(args[1], args[2]);
                                 return new PacketSend("Modified");
 
                         }
                         break;
+                    case 4:
+                        switch (args[0])
+                        {
+                            case "useradd":
+                                users.AddUserToDB(args[1], args[2], args[3]);
+                                return new PacketSend("Added");
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            String response = responses.GetResponse(s);
+            return new PacketSend(response);
+        }
+
+        public override Packet HandleNormal(String s, String login)
+        {
+            String[] args = s.Split(' ');
+            if (args[0] != null)
+            {
+                switch (args.Length)
+                {
+                    case 3:
+                        if(args[0].Equals("usermod") && args[1].Equals(login))
+                        {
+                            users.UpdateUserInDB(args[1], args[2]);
+                            return new PacketSend("Modified");
+                        }
+                        break;                  
                     default:
                         break;
                 }

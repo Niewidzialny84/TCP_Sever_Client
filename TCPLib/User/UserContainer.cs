@@ -117,7 +117,7 @@ namespace TCPLib
             {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
-                    String request = "SELECT Login,Password FROM Users";
+                    String request = "SELECT Login,Password,Admin FROM Users";
 
                     using (SqlCommand command = new SqlCommand(request,connection))
                     {
@@ -126,7 +126,7 @@ namespace TCPLib
                         {
                             while(reader.Read())
                             {
-                                users.Add(new User(reader.GetString(0), reader.GetString(1)));
+                                users.Add(new User(reader.GetString(0), reader.GetString(1), reader.GetBoolean(2).ToString()));
                             }
                         }
                     }
@@ -142,11 +142,11 @@ namespace TCPLib
         /// </summary>
         /// <param name="login">User login.</param>
         /// <param name="password">User password.</param>
-        public void AddUserToDB(String login, String password)
+        public void AddUserToDB(String login, String password, String admin)
         {
            if(FindUser(login) == false)
            {
-                User user = new User(login, password);
+                User user = new User(login, password, admin);
                 int userID = users.Count + 1;
 
                 Add(user);
@@ -159,13 +159,14 @@ namespace TCPLib
                 {
                     using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                     {
-                        String request = "INSERT INTO Users(UserID, Login, Password) VALUES(@id, @login, @password)";               
+                        String request = "INSERT INTO Users(UserID, Login, Password, Admin) VALUES(@id, @login, @password, @admin)";               
                         using (SqlCommand command = new SqlCommand(request, connection))
                         {
                             connection.Open();
                             command.Parameters.Add("@id", SqlDbType.Int).Value = userID;
                             command.Parameters.Add("@login", SqlDbType.VarChar, 255).Value = login;
                             command.Parameters.Add("@password", SqlDbType.VarChar, 255).Value = password;
+                            command.Parameters.Add("@admin", SqlDbType.Bit).Value = Convert.ToBoolean(admin);
                             command.CommandType = CommandType.Text;
                             command.ExecuteNonQuery();
                             connection.Close();
@@ -284,6 +285,18 @@ namespace TCPLib
                 }
             }
             return false;
+        }
+
+        public String GetPermission(String login)
+        {
+            foreach(User u in users)
+            {
+                if(u.Login.Equals(login))
+                {
+                    return u.Admin;
+                }        
+            }
+            return null;
         }
     }
 }

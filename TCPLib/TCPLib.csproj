@@ -60,6 +60,7 @@
     <Compile Include="Old\TCPSyncEcho.cs" />
     <Compile Include="Old\TCP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\RandGen.cs" />
     <Compile Include="User\ActiveUser.cs" />
     <Compile Include="User\User.cs" />
     <Compile Include="User\UserContainer.cs" />
