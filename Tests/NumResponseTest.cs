@@ -5,7 +5,7 @@ using TCPLib.Response;
 namespace Tests
 {
     [TestClass]
-    class NumResponseTest
+    public class NumResponseTest
     {
         [TestMethod]
         public void RandomNumberWrongTest()

@@ -11,7 +11,7 @@ namespace TCPLib.Response
     /// <summary>
     /// Random integer responses.
     /// </summary>
-    class NumResponse
+    public class NumResponse
     {
         /// <summary>
         /// Needs a instance of the RandGen object.
