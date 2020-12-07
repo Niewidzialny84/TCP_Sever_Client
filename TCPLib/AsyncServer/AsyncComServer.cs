@@ -21,6 +21,9 @@ namespace TCPLib.AsyncServer
         /// </summary>
         private CommandHandler handler;
 
+        /// <summary>
+        /// User container used to verify user permissions.
+        /// </summary>
         private UserContainer userCont;
 
         /// <summary>

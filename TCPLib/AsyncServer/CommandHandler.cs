@@ -36,7 +36,7 @@ namespace TCPLib.AsyncServer
         }
 
         /// <summary>
-        /// Funktion used to handle client requests.
+        /// Funktion used to handle client requests. Admin only.
         /// </summary>
         /// <param name="s">Received message.</param>
         /// <returns>Response packet.</returns>
@@ -90,11 +90,11 @@ namespace TCPLib.AsyncServer
         }
 
         /// <summary>
-        /// 
+        /// Funktion used to handle client requests. No admin.
         /// </summary>
-        /// <param name="s"></param>
-        /// <param name="login"></param>
-        /// <returns></returns>
+        /// <param name="s">Received message.</param>
+        /// <param name="login">The login of the active user.</param>
+        /// <returns>Response packet.</returns>
         public override Packet HandleNormal(String s, String login)
         {
             String[] args = s.Split(' ');
