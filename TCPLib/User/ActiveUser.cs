@@ -19,12 +19,14 @@ namespace TCPLib
         /// </summary>
         private int id;
 
+        private String admin;
+
         /// <summary>
         /// Creates a instance of the active user.
         /// </summary>
         /// <param name="username">User login.</param>
         /// <param name="password">User password.</param>
-        public ActiveUser(String username, String password) : base(username,password)
+        public ActiveUser(String username, String password, String admin) : base(username,password,admin)
         {
             logged = true;
         }
@@ -38,5 +40,6 @@ namespace TCPLib
         /// Get/Set session id of the active user.
         /// </summary>
         public int Id { get => id; set => id = value; }
+
     }
 }

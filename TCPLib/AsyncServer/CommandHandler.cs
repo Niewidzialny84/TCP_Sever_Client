@@ -21,6 +21,10 @@ namespace TCPLib.AsyncServer
         /// Contains responses.
         /// </summary>
         private ResponseContainer responses;
+        /// <summary>
+        /// Used to respond with random numbers.
+        /// </summary>
+        NumResponse numResponse = new NumResponse();
 
         /// <summary>
         /// Creates a instance of the command handler.
@@ -32,7 +36,7 @@ namespace TCPLib.AsyncServer
         }
 
         /// <summary>
-        /// Funktion used to handle client requests.
+        /// Funktion used to handle client requests. Admin only.
         /// </summary>
         /// <param name="s">Received message.</param>
         /// <returns>Response packet.</returns>
@@ -60,16 +64,55 @@ namespace TCPLib.AsyncServer
                         break;
                     case 3:
                         switch (args[0])
-                        {
-                            case "useradd":
-                                users.AddUserToDB(args[1], args[2]);
-                                return new PacketSend("Added");
+                        {                     
                             case "usermod":
                                 users.UpdateUserInDB(args[1], args[2]);
                                 return new PacketSend("Modified");
 
+                            case "random":
+                                return new PacketSend(numResponse.getRand(args[1],args[2]));
                         }
                         break;
+                    case 4:
+                        switch (args[0])
+                        {
+                            case "useradd":
+                                users.AddUserToDB(args[1], args[2], args[3]);
+                                return new PacketSend("Added");
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            String response = responses.GetResponse(s);
+            return new PacketSend(response);
+        }
+
+        /// <summary>
+        /// Funktion used to handle client requests. No admin.
+        /// </summary>
+        /// <param name="s">Received message.</param>
+        /// <param name="login">The login of the active user.</param>
+        /// <returns>Response packet.</returns>
+        public override Packet HandleNormal(String s, String login)
+        {
+            String[] args = s.Split(' ');
+            if (args[0] != null)
+            {
+                switch (args.Length)
+                {
+                    case 3:
+                        if (args[0].Equals("usermod") && args[1].Equals(login))
+                        {
+                            users.UpdateUserInDB(args[1], args[2]);
+                            return new PacketSend("Modified");
+                        }
+                        else if (args[0].Equals("random"))
+                        {
+                            return new PacketSend(numResponse.getRand(args[1], args[2]));
+                        }
+                        break;                  
                     default:
                         break;
                 }
@@ -87,19 +130,19 @@ namespace TCPLib.AsyncServer
         {
             if (parsed.Length <= 1)
             {
-                return new PacketSend("Invalid credentials");
+                return new PacketSend("NAK");
             }
             else
             {
                 if (users.CheckCredentials(parsed[0], parsed[1]))
                 {
-                    PacketLogin packet = new PacketLogin("Succesfully logged in");
+                    PacketLogin packet = new PacketLogin("ACK");
                     packet.Success = true;
                     return packet;
                 }
                 else
                 {
-                    return new PacketSend("Invalid login");
+                    return new PacketSend("NAK");
                 }
             }
         }

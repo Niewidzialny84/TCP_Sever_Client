@@ -22,6 +22,11 @@ namespace TCPLib.AsyncServer
         private CommandHandler handler;
 
         /// <summary>
+        /// User container used to verify user permissions.
+        /// </summary>
+        private UserContainer userCont;
+
+        /// <summary>
         /// Creates a instance of the server.
         /// </summary>
         /// <param name="ipAddress">Server IP adress.</param>
@@ -30,6 +35,7 @@ namespace TCPLib.AsyncServer
         {
             Server = new TcpListener(ipAddress, port);
             handler = new CommandHandler();
+            userCont = new UserContainer();
         }
 
         /// <summary>
@@ -72,10 +78,11 @@ namespace TCPLib.AsyncServer
                 {
                     String[] parsed = packet.Message.Split(' ');
                     packet = handler.CheckLogin(parsed);
+                    userCont = new UserContainer();
 
                     if (packet is PacketLogin)
                     {
-                        user = new ActiveUser(parsed[0], parsed[1]);
+                        user = new ActiveUser(parsed[0], parsed[1], userCont.GetPermission(parsed[0]));
                     }
                 } else
                 {
@@ -85,7 +92,16 @@ namespace TCPLib.AsyncServer
                     //await writer.WriteAsync(packet.Message);
                     //System.Console.Write(s.ToString());
                     //packet = new Packet(response);
-                    packet = handler.Handle(packet.Message);
+
+                    if (user.Admin.Equals("True"))
+                    {
+                        packet = handler.Handle(packet.Message);
+                    }
+                    else
+                    {
+                        packet = handler.HandleNormal(packet.Message, user.Login);
+                    }
+                    
                 }
                 await stream.WriteAsync(packet.Buffer, 0, packet.Size);
             }

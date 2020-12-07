@@ -16,5 +16,6 @@ namespace TCPLib.AsyncServer
         public Handler() { }
 
         public abstract Packet Handle(T s);
+        public abstract Packet HandleNormal(T s, String login);
     }
 }

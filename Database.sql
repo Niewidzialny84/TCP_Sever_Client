@@ -6,12 +6,13 @@
 	UserID int NOT NULL,
 	Login varchar(255),
 	Password varchar(255),
+	Admin BIT NOT NULL DEFAULT 0,
 	PRIMARY KEY (UserID)
 );*/
 
---INSERT INTO Users (UserID,Login,Password) VALUES ( 1, 'admin', 'admin');
---INSERT INTO Users (UserID,Login,Password) VALUES ( 2, 'user5', 'qwerty');
---INSERT INTO Users (UserID,Login,Password) VALUES ( 3, 'xx_GoodPlayer_xx', 'hello');
+--INSERT INTO Users (UserID,Login,Password,Admin) VALUES ( 1, 'admin', 'admin', 1);
+--INSERT INTO Users (UserID,Login,Password,Admin) VALUES ( 2, 'user5', 'qwerty', 0);
+--INSERT INTO Users (UserID,Login,Password,Admin) VALUES ( 3, 'xx_GoodPlayer_xx', 'hello', 0);
 
 --SELECT * From Users;
 
