@@ -28,5 +28,10 @@ namespace GuiClient
         {
 
         }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
