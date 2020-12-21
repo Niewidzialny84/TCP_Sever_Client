@@ -123,19 +123,28 @@ namespace TCPLib
         public bool LoginUser(String login, String passwd)
         {
             Packet send = new PacketSend(login+" "+passwd);
-            stream.Write(send.Buffer, 0, send.Size);
-            byte[] buffer = new byte[Buffer_size];
-            int messageSize = stream.Read(buffer, 0, Buffer_size);
-            Packet recive = new PacketRecive(buffer, messageSize);
-            System.Console.WriteLine(recive.Message);
-            if(Equals(recive.Message,"ACK"))
+            if(stream==null)
             {
-                return true;
+
+                return false;
             }
             else
             {
-                return false;
+                stream.Write(send.Buffer, 0, send.Size);
+                byte[] buffer = new byte[Buffer_size];
+                int messageSize = stream.Read(buffer, 0, Buffer_size);
+                Packet recive = new PacketRecive(buffer, messageSize);
+                System.Console.WriteLine(recive.Message);
+                if (Equals(recive.Message, "ACK"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
+            
 
         }
         public String Communicate(String msg)
