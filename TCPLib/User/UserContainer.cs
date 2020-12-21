@@ -275,7 +275,7 @@ namespace TCPLib
         /// </summary>
         /// <param name="login">User login to search for.</param>
         /// <returns>Returns if user exists.</returns>
-        private Boolean FindUser(String login)
+        private bool FindUser(String login)
         {
             foreach(User u in users)
             {
