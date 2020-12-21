@@ -17,7 +17,7 @@ namespace Client
         /// <param name="args">Unused</param>
         static void Main(string[] args)
         {
-            TCPLib.Client client = new TCPLib.Client(IPAddress.Parse("127.0.0.1"), 40000);
+            TCPLib.Client client = new TCPLib.ConsoleClient(IPAddress.Parse("127.0.0.1"), 40000);
             client.Start();
             System.Console.ReadKey();
         }
