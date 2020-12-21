@@ -9,29 +9,14 @@ namespace TCPLib.Response
     /// <summary>
     /// Contains and operates on posible server responses.
     /// </summary>
-    public class ResponseContainer
-    {
-        /// <summary>
-        /// A list of possible responses.
-        /// </summary>
-        private List<Response> responses;
-
+    public class ResponseContainer : Container<Response>
+    { 
         /// <summary>
         /// Creates a instance of the response container.
         /// </summary>
-        public ResponseContainer()
+        public ResponseContainer() : base()
         {
-            responses = new List<Response>();
             LoadFromDB();
-        }
-        
-        /// <summary>
-        /// Adds a new respons to the list.
-        /// </summary>
-        /// <param name="response">The response with input and output.</param>
-        public void Add(Response response)
-        {
-            responses.Add(response);
         }
         
         /// <summary>
@@ -42,7 +27,7 @@ namespace TCPLib.Response
         public String GetResponse(String input)
         {
             String output = "Sorry i dont understand";
-            foreach (Response x in responses)
+            foreach (Response x in list)
             {
                 if (x.Input.Equals(input))
                 {
@@ -50,17 +35,6 @@ namespace TCPLib.Response
                 }
             }
             return output;
-        }
-
-        /// <summary>
-        /// Prints a list of all users.
-        /// </summary>
-        public void PrintUsers()
-        {
-            foreach (Response x in responses)
-            {
-                System.Console.WriteLine(x);
-            }
         }
 
         /// <summary>
@@ -85,7 +59,7 @@ namespace TCPLib.Response
                         {
                             while (reader.Read())
                             {
-                                responses.Add(new Response(reader.GetString(0), reader.GetString(1)));
+                                list.Add(new Response(reader.GetString(0), reader.GetString(1)));
                             }
                         }
                     }

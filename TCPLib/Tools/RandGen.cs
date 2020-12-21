@@ -11,10 +11,15 @@ namespace TCPLib.Tools
     /// </summary>
     public class RandGen
     {
+
+        private Random random;
+
         /// <summary>
         /// Constructor.
         /// </summary>
-        public RandGen() { }
+        public RandGen() {
+            random = new Random();
+        }
 
         /// <summary>
         /// This function allows to get a random integer.
@@ -24,7 +29,6 @@ namespace TCPLib.Tools
         /// <returns>The random integer.</returns>
         public int randInt(int min, int max)
         {
-          Random random = new Random();
           return random.Next(min, max + 1);
         }
     }

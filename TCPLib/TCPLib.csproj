@@ -50,6 +50,7 @@
     <Compile Include="AsyncServer\Handler.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ConsoleClient.cs" />
+    <Compile Include="Container.cs" />
     <Compile Include="GuiClient.cs" />
     <Compile Include="PacketLib\Packet.cs" />
     <Compile Include="PacketLib\PacketLogin.cs" />

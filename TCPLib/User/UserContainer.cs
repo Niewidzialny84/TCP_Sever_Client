@@ -10,29 +10,14 @@ namespace TCPLib
     /// <summary>
     /// Used to perform operations on the users data base as well as users.
     /// </summary>
-    public class UserContainer
+    public class UserContainer : Container<User>
     {
-        /// <summary>
-        /// A list containing all given users.
-        /// </summary>
-        private List<User> users;
-
         /// <summary>
         /// Creates a instance of the user container.
         /// </summary>
         public UserContainer()
         {
-            users = new List<User>();
             LoadFromDB();
-        }
-
-        /// <summary>
-        /// Adds user to the container.
-        /// </summary>
-        /// <param name="user">A user that will be added to a container.</param>
-        public void Add(User user)
-        {
-            users.Add(user);
         }
 
         /// <summary>
@@ -45,14 +30,14 @@ namespace TCPLib
             {
                 User tmp = new User();
 
-                foreach (User u in users)
+                foreach (User u in list)
                 {
                     if(u.Login.Equals(login))
                     {
                         tmp = u;
                     }
                 }
-                users.Remove(tmp);
+                list.Remove(tmp);
             }
         }
 
@@ -66,7 +51,7 @@ namespace TCPLib
             if (FindUser(login) == true)
             {
               
-                foreach (User u in users)
+                foreach (User u in list)
                 {
                     if (u.Login.Equals(login))
                     {
@@ -84,7 +69,7 @@ namespace TCPLib
         /// <returns>If user with login and password was found.</returns>
         public bool CheckCredentials(String login,String password)
         {
-            foreach(User x in users)
+            foreach(User x in list)
             {
                 if(x.Login.Equals(login) && x.Password.Equals(password)) {
                     return true;
@@ -98,7 +83,7 @@ namespace TCPLib
         /// </summary>
         public void PrintUsers()
         {
-            foreach (User x in users)
+            foreach (User x in list)
             {
                 System.Console.WriteLine(x);
             }
@@ -126,7 +111,7 @@ namespace TCPLib
                         {
                             while(reader.Read())
                             {
-                                users.Add(new User(reader.GetString(0), reader.GetString(1), reader.GetBoolean(2).ToString()));
+                                list.Add(new User(reader.GetString(0), reader.GetString(1), reader.GetBoolean(2).ToString()));
                             }
                         }
                     }
@@ -147,7 +132,7 @@ namespace TCPLib
            if(FindUser(login) == false)
            {
                 User user = new User(login, password, admin);
-                int userID = users.Count + 1;
+                int userID = list.Count + 1;
 
                 Add(user);
               
@@ -263,7 +248,7 @@ namespace TCPLib
         public override string ToString()
         {
             String s = "";
-            foreach(User u in users)
+            foreach(User u in list)
             {
                 s += u.ToString() + "\r\n";
             }
@@ -277,7 +262,7 @@ namespace TCPLib
         /// <returns>Returns if user exists.</returns>
         private bool FindUser(String login)
         {
-            foreach(User u in users)
+            foreach(User u in list)
             {
                 if(u.Login.Equals(login))
                 {
@@ -289,7 +274,7 @@ namespace TCPLib
 
         public String GetPermission(String login)
         {
-            foreach(User u in users)
+            foreach(User u in list)
             {
                 if(u.Login.Equals(login))
                 {
