@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TCPLib.AsyncServer.AsyncAbstractServer">
+    <Position X="4.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIEAAAgACAAIAAAAAAAAAAACAgAAAgIAAAAAgACAAI=</HashCode>
+      <FileName>AsyncServer\AsyncAbstractServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPLib.AsyncServer.AsyncComServer">
+    <Position X="6" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAgA=</HashCode>
+      <FileName>AsyncServer\AsyncComServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPLib.AsyncServer.CommandHandler">
+    <Position X="2.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAEAAAAAAAAAAAAAAAAAAAAAAAiIAAAAAAAABAAA=</HashCode>
+      <FileName>AsyncServer\CommandHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPLib.AsyncServer.Handler&lt;T&gt;">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAABAAA=</HashCode>
+      <FileName>AsyncServer\Handler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPLib.GuiClient">
+    <Position X="9.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAAAAAAAAAAAAACAIAAAgACAAABAAAAAE=</HashCode>
+      <FileName>Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPLib.ActiveUser">
+    <Position X="15" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAIAAAACAAAAAAAAAAEAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>User\ActiveUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPLib.User">
+    <Position X="13.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAQAAAAEAAAACAAAQAgAAEAA=</HashCode>
+      <FileName>User\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPLib.UserContainer">
+    <Position X="8" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oAYAACAAAAAAgAAEIAAABAAAAAAgAAAAAAAAAAABABI=</HashCode>
+      <FileName>User\UserContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPLib.PacketLib.Packet">
+    <Position X="4.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAIAAAAAAAAAAAAAAAABAIAAAQCA=</HashCode>
+      <FileName>PacketLib\Packet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPLib.PacketLib.PacketLogin">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>PacketLib\PacketLogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPLib.PacketLib.PacketRecive">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PacketLib\PacketRecive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPLib.PacketLib.PacketSend">
+    <Position X="2.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PacketLib\PacketSend.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPLib.Response.NumResponse">
+    <Position X="15" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Response\NumResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPLib.Response.Response">
+    <Position X="11.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAIAAAAGAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Response\Response.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPLib.Response.ResponseContainer">
+    <Position X="13.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAEAAAAAAAAAAIAAAAAAAAAAEAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Response\ResponseContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPLib.Tools.RandGen">
+    <Position X="9.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Tools\RandGen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

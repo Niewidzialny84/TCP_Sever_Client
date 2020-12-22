@@ -13,6 +13,7 @@ namespace GuiClient
     public partial class ClientCom : Form
     {
         TCPLib.GuiClient client;
+
         public ClientCom(TCPLib.GuiClient recclient)
         {
             this.client = recclient;
@@ -27,6 +28,12 @@ namespace GuiClient
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void logoutButton_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+            
         }
     }
 }

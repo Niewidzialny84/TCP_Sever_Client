@@ -49,6 +49,9 @@
     <Compile Include="AsyncServer\CommandHandler.cs" />
     <Compile Include="AsyncServer\Handler.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="ConsoleClient.cs" />
+    <Compile Include="Container.cs" />
+    <Compile Include="GuiClient.cs" />
     <Compile Include="PacketLib\Packet.cs" />
     <Compile Include="PacketLib\PacketLogin.cs" />
     <Compile Include="PacketLib\PacketRecive.cs" />
@@ -56,15 +59,14 @@
     <Compile Include="Response\NumResponse.cs" />
     <Compile Include="Response\Response.cs" />
     <Compile Include="Response\ResponseContainer.cs" />
-    <Compile Include="Old\Server.cs" />
-    <Compile Include="Old\TCPAsyncEcho.cs" />
-    <Compile Include="Old\TCPSyncEcho.cs" />
-    <Compile Include="Old\TCP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\RandGen.cs" />
     <Compile Include="User\ActiveUser.cs" />
     <Compile Include="User\User.cs" />
     <Compile Include="User\UserContainer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

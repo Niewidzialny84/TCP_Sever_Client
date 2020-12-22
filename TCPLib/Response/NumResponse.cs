@@ -29,7 +29,7 @@ namespace TCPLib.Response
         /// <param name="minS">Minimal value.</param>
         /// <param name="maxS">Maximal value.</param>
         /// <returns>Response string.</returns>
-        public string getRand(string minS, string maxS)
+        public String getRand(String minS, String maxS)
         {
             if(Regex.IsMatch(minS, @"^\d+$") && Regex.IsMatch(maxS, @"^\d+$"))
             {
