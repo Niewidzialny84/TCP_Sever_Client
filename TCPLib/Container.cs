@@ -17,8 +17,8 @@ namespace TCPLib
         /// <summary>
         /// Adds a new respons to the list.
         /// </summary>
-        /// <param name="response">The response with input and output.</param>
-        public void Add(T value)
+        /// <param name="response">The response with input and output.</param> 
+        public void Create(T value)  // This is something like Create in CRUD 
         {
             list.Add(value);
         }
@@ -26,12 +26,20 @@ namespace TCPLib
         /// <summary>
         /// Prints a list.
         /// </summary>
-        public void Print()
+        public void Read() // This is something like Read in CRUD 
         {
             foreach (T x in list)
             {
                 System.Console.WriteLine(x);
             }
         }
+
+        public virtual void LoadFromDB() { }
+
+        public virtual void Delete(String arg) { }  // This is something like Delete in CRUD 
+
+        public virtual void Update(String arg1, String arg2) { }
+
+
     }
 }

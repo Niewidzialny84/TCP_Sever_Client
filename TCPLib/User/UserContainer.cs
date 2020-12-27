@@ -10,7 +10,7 @@ namespace TCPLib
     /// <summary>
     /// Used to perform operations on the users data base as well as users.
     /// </summary>
-    public class UserContainer : Container<User>, IUserContainer
+    public class UserContainer : Container<User>
     {
         /// <summary>
         /// Creates a instance of the user container.
@@ -24,7 +24,7 @@ namespace TCPLib
         /// Removes a user with the given login.
         /// </summary>
         /// <param name="login">User login.</param>
-        public void Remove(String login)
+        public override void Delete(String login)
         {
             if(FindUser(login) == true)
             {
@@ -46,7 +46,7 @@ namespace TCPLib
         /// </summary>
         /// <param name="login">User login.</param>
         /// <param name="password">New user password.</param>
-        public void Update(String login, String password)
+        public override void Update(String login, String password)
         {
             if (FindUser(login) == true)
             {
@@ -81,7 +81,7 @@ namespace TCPLib
         /// <summary>
         /// Prints a list of all users.
         /// </summary>
-        public void PrintUsers()
+        public new void Read()
         {
             foreach (User x in list)
             {
@@ -92,7 +92,7 @@ namespace TCPLib
         /// <summary>
         /// Loads all users from the data base to use them in later operations.
         /// </summary>
-        public void LoadFromDB()
+        public override void LoadFromDB()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
             builder.DataSource = "(local)";
@@ -134,7 +134,7 @@ namespace TCPLib
                 User user = new User(login, password, admin);
                 int userID = list.Count + 1;
 
-                Add(user);
+                Create(user);
               
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
                 builder.DataSource = "(local)";
@@ -174,7 +174,7 @@ namespace TCPLib
             if (FindUser(login) == true)
             {
                         
-                Remove(login);
+                Delete(login);
 
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
                 builder.DataSource = "(local)";

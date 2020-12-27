@@ -40,7 +40,7 @@ namespace TCPLib.Response
         /// <summary>
         /// Loads all responses saved in a data base to use them later.
         /// </summary>
-        private void LoadFromDB()
+        public override void LoadFromDB()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
             builder.DataSource = "(local)";
