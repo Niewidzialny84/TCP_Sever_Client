@@ -93,7 +93,7 @@ namespace TCPLib.AsyncServer
                     //System.Console.Write(s.ToString());
                     //packet = new Packet(response);
 
-                    if (user.Admin.Equals("True"))
+                    if (user.Admin == true)
                     {
                         packet = handler.Handle(packet.Message);
                     }
