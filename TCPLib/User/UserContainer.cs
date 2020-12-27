@@ -111,7 +111,7 @@ namespace TCPLib
                         {
                             while(reader.Read())
                             {
-                                list.Add(new User(reader.GetString(0), reader.GetString(1), reader.GetBoolean(2).ToString()));
+                                list.Add(new User(reader.GetString(0), reader.GetString(1), reader.GetBoolean(2)));
                             }
                         }
                     }
@@ -127,7 +127,7 @@ namespace TCPLib
         /// </summary>
         /// <param name="login">User login.</param>
         /// <param name="password">User password.</param>
-        public void AddUserToDB(String login, String password, String admin)
+        public void AddUserToDB(String login, String password, Boolean admin)
         {
            if(FindUser(login) == false)
            {
@@ -151,7 +151,7 @@ namespace TCPLib
                             command.Parameters.Add("@id", SqlDbType.Int).Value = userID;
                             command.Parameters.Add("@login", SqlDbType.VarChar, 255).Value = login;
                             command.Parameters.Add("@password", SqlDbType.VarChar, 255).Value = password;
-                            command.Parameters.Add("@admin", SqlDbType.Bit).Value = Convert.ToBoolean(admin);
+                            command.Parameters.Add("@admin", SqlDbType.Bit).Value = admin;
                             command.CommandType = CommandType.Text;
                             command.ExecuteNonQuery();
                             connection.Close();
@@ -272,7 +272,7 @@ namespace TCPLib
             return false;
         }
 
-        public String GetPermission(String login)
+        public Boolean GetPermission(String login)
         {
             foreach(User u in list)
             {
@@ -281,7 +281,7 @@ namespace TCPLib
                     return u.Admin;
                 }        
             }
-            return null;
+            return false;
         }
     }
 }

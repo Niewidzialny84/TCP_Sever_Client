@@ -39,7 +39,7 @@ namespace Tests
         [TestMethod]
         public void AddUserTest()
         {
-            c.AddUserToDB("a", "a","True");
+            c.AddUserToDB("a", "a",true);
 
             Assert.IsTrue(c.CheckCredentials("a", "a"));
             Assert.IsTrue(c.GetPermission("a").Equals("True"));
