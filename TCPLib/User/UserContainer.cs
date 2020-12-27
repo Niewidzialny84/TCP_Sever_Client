@@ -10,7 +10,7 @@ namespace TCPLib
     /// <summary>
     /// Used to perform operations on the users data base as well as users.
     /// </summary>
-    public class UserContainer : Container<User>
+    public class UserContainer : Container<User>, IUserContainer
     {
         /// <summary>
         /// Creates a instance of the user container.
@@ -92,7 +92,7 @@ namespace TCPLib
         /// <summary>
         /// Loads all users from the data base to use them in later operations.
         /// </summary>
-        private void LoadFromDB()
+        public void LoadFromDB()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
             builder.DataSource = "(local)";
