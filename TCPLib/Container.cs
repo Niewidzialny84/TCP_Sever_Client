@@ -8,27 +8,27 @@ namespace TCPLib
 {
     public abstract class Container<T>
     {
-        protected List<T> list;
+        protected List<T> contentList;
         public Container()
         {
-            list = new List<T>();
+            contentList = new List<T>();
         }
 
         /// <summary>
         /// Adds a new respons to the list.
         /// </summary>
         /// <param name="response">The response with input and output.</param> 
-        public void Create(T value)  // This is something like Create in CRUD 
+        public void Create(T value) 
         {
-            list.Add(value);
+            contentList.Add(value);
         }
 
         /// <summary>
         /// Prints a list.
         /// </summary>
-        public void Read() // This is something like Read in CRUD 
+        public void Read() 
         {
-            foreach (T x in list)
+            foreach (T x in contentList)
             {
                 System.Console.WriteLine(x);
             }
@@ -36,10 +36,11 @@ namespace TCPLib
 
         public virtual void LoadFromDB() { }
 
-        public virtual void Delete(String arg) { }  // This is something like Delete in CRUD 
+        public virtual void Delete(String arg) { } 
 
         public virtual void Update(String arg1, String arg2) { }
 
+        public virtual bool Find(String arg) { return true; }
 
     }
 }

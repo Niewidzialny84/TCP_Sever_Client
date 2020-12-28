@@ -48,6 +48,7 @@
     <Compile Include="AsyncServer\AsyncComServer.cs" />
     <Compile Include="AsyncServer\CommandHandler.cs" />
     <Compile Include="AsyncServer\Handler.cs" />
+    <Compile Include="User\ActiveUserContainer.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="ConsoleClient.cs" />
     <Compile Include="Container.cs" />

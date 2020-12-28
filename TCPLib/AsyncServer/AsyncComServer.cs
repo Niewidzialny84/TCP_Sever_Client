@@ -26,6 +26,8 @@ namespace TCPLib.AsyncServer
         /// </summary>
         private UserContainer userCont;
 
+        private ActiveUserContainer activeUserContainer;
+
         /// <summary>
         /// Creates a instance of the server.
         /// </summary>
@@ -36,6 +38,7 @@ namespace TCPLib.AsyncServer
             Server = new TcpListener(ipAddress, port);
             handler = new CommandHandler();
             userCont = new UserContainer();
+            activeUserContainer = new ActiveUserContainer();
         }
 
         /// <summary>
@@ -82,9 +85,14 @@ namespace TCPLib.AsyncServer
 
                     if (packet is PacketLogin)
                     {
-                        user = new ActiveUser(parsed[0], parsed[1], userCont.GetPermission(parsed[0]));
+                        if (!activeUserContainer.Find(parsed[0]))
+                        {
+                            user = new ActiveUser(parsed[0], parsed[1], userCont.GetPermission(parsed[0]));
+                            activeUserContainer.Create(user);
+                        }                                                  
                     }
-                } else
+                }
+                else if(user != null)
                 {
                     //String response = responses.GetResponse(packet.Message);
                     //StringBuilder s = new StringBuilder("");
@@ -101,10 +109,11 @@ namespace TCPLib.AsyncServer
                     {
                         packet = handler.HandleNormal(packet.Message, user.Login);
                     }
-                    
+
                 }
                 await stream.WriteAsync(packet.Buffer, 0, packet.Size);
             }
+            activeUserContainer.Delete(user.Login);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace TCPLib.Response
         public String GetResponse(String input)
         {
             String output = "Sorry i dont understand";
-            foreach (Response x in list)
+            foreach (Response x in contentList)
             {
                 if (x.Input.Equals(input))
                 {
@@ -59,7 +59,7 @@ namespace TCPLib.Response
                         {
                             while (reader.Read())
                             {
-                                list.Add(new Response(reader.GetString(0), reader.GetString(1)));
+                                contentList.Add(new Response(reader.GetString(0), reader.GetString(1)));
                             }
                         }
                     }

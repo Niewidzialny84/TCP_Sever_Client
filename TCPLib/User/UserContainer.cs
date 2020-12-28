@@ -26,18 +26,18 @@ namespace TCPLib
         /// <param name="login">User login.</param>
         public override void Delete(String login)
         {
-            if(FindUser(login) == true)
+            if(Find(login) == true)
             {
                 User tmp = new User();
 
-                foreach (User u in list)
+                foreach (User u in contentList)
                 {
                     if(u.Login.Equals(login))
                     {
                         tmp = u;
                     }
                 }
-                list.Remove(tmp);
+                contentList.Remove(tmp);
             }
         }
 
@@ -48,10 +48,10 @@ namespace TCPLib
         /// <param name="password">New user password.</param>
         public override void Update(String login, String password)
         {
-            if (FindUser(login) == true)
+            if (Find(login) == true)
             {
               
-                foreach (User u in list)
+                foreach (User u in contentList)
                 {
                     if (u.Login.Equals(login))
                     {
@@ -69,7 +69,7 @@ namespace TCPLib
         /// <returns>If user with login and password was found.</returns>
         public bool CheckCredentials(String login,String password)
         {
-            foreach(User x in list)
+            foreach(User x in contentList)
             {
                 if(x.Login.Equals(login) && x.Password.Equals(password)) {
                     return true;
@@ -83,7 +83,7 @@ namespace TCPLib
         /// </summary>
         public new void Read()
         {
-            foreach (User x in list)
+            foreach (User x in contentList)
             {
                 System.Console.WriteLine(x);
             }
@@ -111,7 +111,7 @@ namespace TCPLib
                         {
                             while(reader.Read())
                             {
-                                list.Add(new User(reader.GetString(0), reader.GetString(1), reader.GetBoolean(2)));
+                                contentList.Add(new User(reader.GetString(0), reader.GetString(1), reader.GetBoolean(2)));
                             }
                         }
                     }
@@ -129,10 +129,10 @@ namespace TCPLib
         /// <param name="password">User password.</param>
         public void AddUserToDB(String login, String password, Boolean admin)
         {
-           if(FindUser(login) == false)
+           if(Find(login) == false)
            {
                 User user = new User(login, password, admin);
-                int userID = list.Count + 1;
+                int userID = contentList.Count + 1;
 
                 Create(user);
               
@@ -171,7 +171,7 @@ namespace TCPLib
         /// <param name="login">User login to be removed.</param>
         public void RemoveUserFromDB(String login)
         {
-            if (FindUser(login) == true)
+            if (Find(login) == true)
             {
                         
                 Delete(login);
@@ -209,7 +209,7 @@ namespace TCPLib
         /// <param name="password">User password.</param>
         public void UpdateUserInDB(String login, String password)
         {
-            if (FindUser(login) == true)
+            if (Find(login) == true)
             {
 
                 Update(login, password);
@@ -248,7 +248,7 @@ namespace TCPLib
         public override string ToString()
         {
             String s = "";
-            foreach(User u in list)
+            foreach(User u in contentList)
             {
                 s += u.ToString() + "\r\n";
             }
@@ -260,9 +260,9 @@ namespace TCPLib
         /// </summary>
         /// <param name="login">User login to search for.</param>
         /// <returns>Returns if user exists.</returns>
-        private bool FindUser(String login)
+        public override bool Find(String login)
         {
-            foreach(User u in list)
+            foreach(User u in contentList)
             {
                 if(u.Login.Equals(login))
                 {
@@ -274,7 +274,7 @@ namespace TCPLib
 
         public Boolean GetPermission(String login)
         {
-            foreach(User u in list)
+            foreach(User u in contentList)
             {
                 if(u.Login.Equals(login))
                 {
