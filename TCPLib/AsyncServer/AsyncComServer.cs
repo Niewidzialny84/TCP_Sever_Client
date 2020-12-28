@@ -70,50 +70,65 @@ namespace TCPLib.AsyncServer
         {
             NetworkStream stream = client.GetStream();
             ActiveUser user = null;
-            while (client.Connected)
+            try
             {
-                byte[] buffer = new byte[Buffer_size];
-                int i = await stream.ReadAsync(buffer, 0, buffer.Length);
-
-                Packet packet = new PacketRecive(buffer, i);
-
-                if (user == null)
+                while (client.Connected)
                 {
-                    String[] parsed = packet.Message.Split(' ');
-                    packet = handler.CheckLogin(parsed);
-                    userCont = new UserContainer();
+                    byte[] buffer = new byte[Buffer_size];
+                    int i = await stream.ReadAsync(buffer, 0, buffer.Length);
 
-                    if (packet is PacketLogin)
+                    Packet packet = new PacketRecive(buffer, i);
+
+                    if (user == null)
                     {
-                        if (!activeUserContainer.Find(parsed[0]))
+                        String[] parsed = packet.Message.Split(' ');
+                        packet = handler.CheckLogin(parsed);
+                        userCont = new UserContainer();
+
+                        if (packet is PacketLogin)
                         {
-                            user = new ActiveUser(parsed[0], parsed[1], userCont.GetPermission(parsed[0]));
-                            activeUserContainer.Create(user);
-                        }                                                  
-                    }
-                }
-                else if(user != null)
-                {
-                    //String response = responses.GetResponse(packet.Message);
-                    //StringBuilder s = new StringBuilder("");
-                    //StringWriter writer = new StringWriter(s);
-                    //await writer.WriteAsync(packet.Message);
-                    //System.Console.Write(s.ToString());
-                    //packet = new Packet(response);
+                            if (!activeUserContainer.Find(parsed[0]))
+                            {
+                                user = new ActiveUser(parsed[0], parsed[1], userCont.GetPermission(parsed[0]));
+                                activeUserContainer.Create(user);
+                            }
+                            else
+                            {
+                                packet = new PacketSend("NAK");
+                            }
+                        }
 
-                    if (user.Admin == true)
-                    {
-                        packet = handler.Handle(packet.Message);
                     }
-                    else
+                    else if (user != null)
                     {
-                        packet = handler.HandleNormal(packet.Message, user.Login);
-                    }
+                        //String response = responses.GetResponse(packet.Message);
+                        //StringBuilder s = new StringBuilder("");
+                        //StringWriter writer = new StringWriter(s);
+                        //await writer.WriteAsync(packet.Message);
+                        //System.Console.Write(s.ToString());
+                        //packet = new Packet(response);
 
-                }
-                await stream.WriteAsync(packet.Buffer, 0, packet.Size);
+                        if (user.Admin == true)
+                        {
+                            packet = handler.Handle(packet.Message);
+                        }
+                        else
+                        {
+                            packet = handler.HandleNormal(packet.Message, user.Login);
+                        }
+
+                    }
+                    await stream.WriteAsync(packet.Buffer, 0, packet.Size);
+                }            
             }
-            activeUserContainer.Delete(user.Login);
+            catch(Exception e)
+            {
+                
+            }
+            finally
+            {
+                activeUserContainer.Delete(user.Login);
+            }
         }
     }
 }
