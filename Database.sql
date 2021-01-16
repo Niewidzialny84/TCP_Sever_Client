@@ -29,3 +29,15 @@
 --INSERT INTO Responses(ResponseID,Input,Output) VALUES(4,'oof','yes oof indeed');
 
 --SELECT * FROM Responses;
+
+/*
+CREATE TABLE ActiveUsers (
+	UserID int IDENTITY(1,1) NOT NULL,
+	Login varchar(255) NOT NULL,
+	starttime DateTime NOT NULL,
+	endtime DateTime,
+	PRIMARY KEY(UserID)
+);
+*/
+
+--SELECT * FROM ActiveUsers;

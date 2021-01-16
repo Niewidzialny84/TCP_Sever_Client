@@ -25,12 +25,12 @@ namespace TCPLib
             {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
-                    String request = "INSERT INTO ActiveUsers(login, starttime) VALUES(@id, @login, @starttime)";
+                    String request = "INSERT INTO ActiveUsers(Login, starttime) VALUES(@login, @starttime)";
                     using (SqlCommand command = new SqlCommand(request, connection))
                     {
                         connection.Open();
                         command.Parameters.Add("@login", SqlDbType.VarChar, 255).Value = activeUser.Login;
-                        command.Parameters.Add("@starttime", SqlDbType.Date).Value = DateTime.Now;
+                        command.Parameters.Add("@starttime", SqlDbType.DateTime).Value = DateTime.Now;
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                         connection.Close();
@@ -67,12 +67,12 @@ namespace TCPLib
             {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
                 {
-                    String request = "UPDATE ActiveUsers SET endtime = @endtime WHERE (login = @login AND endtime ISNULL)";
+                    String request = "UPDATE ActiveUsers SET endtime = @endtime WHERE (Login = @login AND endtime IS NULL)";
                     using (SqlCommand command = new SqlCommand(request, connection))
                     {
                         connection.Open();
                         command.Parameters.Add("@login", SqlDbType.VarChar, 255).Value = login;
-                        command.Parameters.Add("@endtime", SqlDbType.Date).Value = DateTime.Now;
+                        command.Parameters.Add("@endtime", SqlDbType.DateTime).Value = DateTime.Now;
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                         connection.Close();
