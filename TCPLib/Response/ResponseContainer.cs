@@ -42,10 +42,6 @@ namespace TCPLib.Response
         /// </summary>
         public override void LoadFromDB()
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "(local)";
-            builder.InitialCatalog = "Communication";
-            builder.IntegratedSecurity = true;
             try
             {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))

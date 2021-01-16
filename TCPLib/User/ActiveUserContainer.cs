@@ -17,10 +17,6 @@ namespace TCPLib
 
         public new void Create(ActiveUser activeUser)
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "(local)";
-            builder.InitialCatalog = "Communication";
-            builder.IntegratedSecurity = true;
             try
             {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
@@ -59,10 +55,6 @@ namespace TCPLib
 
         public override void Delete(String login)
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "(local)";
-            builder.InitialCatalog = "Communication";
-            builder.IntegratedSecurity = true;
             try
             {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
@@ -86,6 +78,38 @@ namespace TCPLib
 
             contentList.RemoveAll(elem => elem.Login.Equals(login));
         }
-        
+
+        public String LastLogin(String login)
+        {
+            String r = "";
+            if (Find(login) == true)
+            {
+                try
+                {
+                    using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                    {
+                        String request = "SELECT TOP 1 starttime FROM ActiveUsers WHERE Login = @login AND endtime IS NOT NULL ORDER BY endtime desc;";
+
+                        using (SqlCommand command = new SqlCommand(request, connection))
+                        {
+                            connection.Open();
+                            command.Parameters.Add("@login", SqlDbType.VarChar, 255).Value = login;
+                            using (SqlDataReader reader = command.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    r = reader.GetDateTime(0).ToShortDateString() + " " + reader.GetDateTime(0).ToShortTimeString();
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    System.Console.Write(e.Message);
+                }
+            }
+            return r;
+        }
     }
 }

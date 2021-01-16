@@ -94,10 +94,6 @@ namespace TCPLib
         /// </summary>
         public override void LoadFromDB()
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "(local)";
-            builder.InitialCatalog = "Communication";
-            builder.IntegratedSecurity = true;
             try
             {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
@@ -135,11 +131,7 @@ namespace TCPLib
                 int userID = contentList.Count + 1;
 
                 Create(user);
-              
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "(local)";
-                builder.InitialCatalog = "Communication";
-                builder.IntegratedSecurity = true;
+
                 try
                 {
                     using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
@@ -172,14 +164,8 @@ namespace TCPLib
         public void RemoveUserFromDB(String login)
         {
             if (Find(login) == true)
-            {
-                        
+            {                 
                 Delete(login);
-
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "(local)";
-                builder.InitialCatalog = "Communication";
-                builder.IntegratedSecurity = true;
                 try
                 {
                     using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
@@ -214,10 +200,6 @@ namespace TCPLib
 
                 Update(login, password);
 
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "(local)";
-                builder.InitialCatalog = "Communication";
-                builder.IntegratedSecurity = true;
                 try
                 {
                     using (SqlConnection connection = new SqlConnection(builder.ConnectionString))

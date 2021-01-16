@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +10,13 @@ namespace TCPLib
     public abstract class Container<T>
     {
         protected List<T> contentList;
+        protected SqlConnectionStringBuilder builder;
         public Container()
         {
+            builder = new SqlConnectionStringBuilder();
+            builder.DataSource = "(local)";
+            builder.InitialCatalog = "Communication";
+            builder.IntegratedSecurity = true;
             contentList = new List<T>();
         }
 

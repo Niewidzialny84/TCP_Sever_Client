@@ -108,15 +108,19 @@ namespace TCPLib.AsyncServer
                         //System.Console.Write(s.ToString());
                         //packet = new Packet(response);
 
-                        if (user.Admin == true)
+                        if (packet.Message.Equals("lastlogin"))
                         {
-                            packet = handler.Handle(packet.Message);
+                            packet = new PacketSend(activeUserContainer.LastLogin(user.Login));
+                        } else {
+                            if (user.Admin == true)
+                            {
+                                packet = handler.Handle(packet.Message);
+                            }
+                            else
+                            {
+                                packet = handler.HandleNormal(packet.Message, user.Login);
+                            }
                         }
-                        else
-                        {
-                            packet = handler.HandleNormal(packet.Message, user.Login);
-                        }
-
                     }
                     await stream.WriteAsync(packet.Buffer, 0, packet.Size);
                 }            
