@@ -32,8 +32,8 @@ namespace Tests
         [TestMethod]
         public void RoleTest()
         {
-            Assert.IsTrue(c.GetPermission("admin").Equals("True"));
-            Assert.IsTrue(c.GetPermission("user5").Equals("False"));
+            Assert.IsTrue(c.GetPermission("admin").Equals(true));
+            Assert.IsTrue(c.GetPermission("user5").Equals(false));
         }
 
         [TestMethod]
@@ -42,7 +42,7 @@ namespace Tests
             c.AddUserToDB("a", "a",true);
 
             Assert.IsTrue(c.CheckCredentials("a", "a"));
-            Assert.IsTrue(c.GetPermission("a").Equals("True"));
+            Assert.IsTrue(c.GetPermission("a").Equals(true));
         }
 
         [TestMethod]
