@@ -27,7 +27,7 @@ namespace TCPLib.Response
         public String GetResponse(String input)
         {
             String output = "Sorry i dont understand";
-            foreach (Response x in list)
+            foreach (Response x in contentList)
             {
                 if (x.Input.Equals(input))
                 {
@@ -40,12 +40,8 @@ namespace TCPLib.Response
         /// <summary>
         /// Loads all responses saved in a data base to use them later.
         /// </summary>
-        private void LoadFromDB()
+        public override void LoadFromDB()
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "(local)";
-            builder.InitialCatalog = "Communication";
-            builder.IntegratedSecurity = true;
             try
             {
                 using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
@@ -59,7 +55,7 @@ namespace TCPLib.Response
                         {
                             while (reader.Read())
                             {
-                                list.Add(new Response(reader.GetString(0), reader.GetString(1)));
+                                contentList.Add(new Response(reader.GetString(0), reader.GetString(1)));
                             }
                         }
                     }

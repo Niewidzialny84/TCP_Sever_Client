@@ -19,7 +19,7 @@ namespace TCPLib
         /// </summary>
         private String password;
 
-        private String admin;
+        private Boolean admin;
 
         /// <summary>
         /// Creates a instance of user.
@@ -32,7 +32,7 @@ namespace TCPLib
             this.password = password;        
         }
 
-        public User(String login, String password, String admin)
+        public User(String login, String password, Boolean admin)
         {
             this.login = login;
             this.password = password;
@@ -54,7 +54,7 @@ namespace TCPLib
         /// </summary>
         public String Password { get => password; set => password = value; }
 
-        public String Admin { get => admin; set => admin = value; }
+        public Boolean Admin { get => admin; set => admin = value; }
 
         /// <summary>
         /// Used to return user login and password.

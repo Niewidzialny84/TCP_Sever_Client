@@ -77,7 +77,7 @@ namespace TCPLib.AsyncServer
                         switch (args[0])
                         {
                             case "useradd":
-                                users.AddUserToDB(args[1], args[2], args[3]);
+                                users.AddUserToDB(args[1], args[2], Convert.ToBoolean(args[3]));
                                 return new PacketSend("Added");
                         }
                         break;

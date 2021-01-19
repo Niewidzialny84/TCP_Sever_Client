@@ -29,7 +29,14 @@ namespace TCPLib.Tools
         /// <returns>The random integer.</returns>
         public int randInt(int min, int max)
         {
-          return random.Next(min, max + 1);
+            int a = 0;
+            if(min > max)
+            {
+                a = min;
+                min = max;
+                max = min;
+            }
+            return random.Next(min, max + 1);
         }
     }
 }

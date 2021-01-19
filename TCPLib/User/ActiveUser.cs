@@ -19,14 +19,14 @@ namespace TCPLib
         /// </summary>
         private int id;
 
-        private String admin;
+        private Boolean admin;
 
         /// <summary>
         /// Creates a instance of the active user.
         /// </summary>
         /// <param name="username">User login.</param>
         /// <param name="password">User password.</param>
-        public ActiveUser(String username, String password, String admin) : base(username,password,admin)
+        public ActiveUser(String username, String password, Boolean admin) : base(username,password,admin)
         {
             logged = true;
         }
